@@ -510,13 +510,21 @@ fun ChatScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 12.dp, vertical = 2.dp),
                     shape = RoundedCornerShape(8.dp),
-                    color = if (permissionStatusHealthy) Color(0xFFECFDF5) else Color(0xFFFEF2F2)
+                    color = if (permissionStatusHealthy) {
+                        if (isDark) Color(0xFF1A3A2E) else Color(0xFFECFDF5)
+                    } else {
+                        if (isDark) Color(0xFF3A1A1E) else Color(0xFFFEF2F2)
+                    }
                 ) {
                     Text(
                         text = permissionStatusInfo,
                         style = TextStyle(
                             fontSize = 11.sp,
-                            color = if (permissionStatusHealthy) Color(0xFF047857) else Color(0xFFB91C1C),
+                            color = if (permissionStatusHealthy) {
+                                if (isDark) Color(0xFF34D399) else Color(0xFF047857)
+                            } else {
+                                if (isDark) Color(0xFFF87171) else Color(0xFFB91C1C)
+                            },
                             fontWeight = FontWeight.Medium
                         ),
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
@@ -1739,8 +1747,8 @@ private fun AgentRoundTraceCard(
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 6.dp),
         shape = RoundedCornerShape(14.dp),
-        color = Color(0xFFF8FAFC),
-        border = BorderStroke(1.dp, Color(0xFFE2E8F0))
+        color = if (isDark) Color(0xFF1E1E2E) else Color(0xFFF8FAFC),
+        border = BorderStroke(1.dp, if (isDark) Color(0xFF3A3A4E) else Color(0xFFE2E8F0))
     ) {
         Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
             Row(

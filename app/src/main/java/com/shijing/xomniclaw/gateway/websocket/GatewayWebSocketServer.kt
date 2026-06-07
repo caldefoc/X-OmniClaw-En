@@ -256,6 +256,7 @@ class GatewayWebSocketServer(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>X-OmniClaw Gateway</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -352,6 +353,45 @@ class GatewayWebSocketServer(
         }
         .footer a:hover {
             text-decoration: underline;
+        }
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            }
+            .container {
+                background: #1e1e2e;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            }
+            .subtitle {
+                color: #94a3b8;
+            }
+            .info-box {
+                background: #2a2a3e;
+            }
+            .info-box h3 {
+                color: #90caf9;
+            }
+            .info-item {
+                border-bottom-color: #3a3a4e;
+            }
+            .info-label {
+                color: #94a3b8;
+            }
+            .info-value {
+                color: #e2e8f0;
+            }
+            .method {
+                background: #2a2a3e;
+                border-color: #3a3a4e;
+                color: #e2e8f0;
+            }
+            .footer {
+                color: #94a3b8;
+            }
+            .footer a {
+                color: #90caf9;
+            }
         }
     </style>
 </head>
