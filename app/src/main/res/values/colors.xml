@@ -32,4 +32,18 @@
 
     <!-- 按钮/图标颜色 -->
     <color name="icon_primary">#666666</color>
+
+    <!-- Float Window 按钮背景色 -->
+    <color name="float_btn_bookmark">#2E7D32</color>
+    <color name="float_btn_stop_red">#D32F2F</color>
+    <color name="float_btn_stop_purple">#7B1FA2</color>
+    <color name="float_btn_voice_default">#1E88E5</color>
+    <color name="float_btn_voice_listening">#E53935</color>
+    <color name="float_btn_disabled">#555555</color>
+    <color name="float_btn_disabled_dark">#444444</color>
+
+    <!-- 悬浮窗半透明黑色覆盖层（与背景无关，语义固定） -->
+    <color name="overlay_semi_black_45">#73000000</color>
+    <color name="overlay_semi_black_40">#66000000</color>
+    <color name="overlay_semi_black_50">#80000000</color>
 </resources>

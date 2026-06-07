@@ -99,19 +99,20 @@ object BehaviorRecordingFloatWindow {
     private fun render(state: BehaviorRecordingController.UiState) {
         statusTextView?.text = state.statusText
         messageTextView?.text = state.latestMessage
+        val ctx = statusTextView?.context ?: return
         bookmarkButton?.let { button ->
             button.visibility = if (state.canBookmarkCurrentPage) android.view.View.VISIBLE else android.view.View.GONE
             button.imageTintList = ColorStateList.valueOf(Color.WHITE)
             button.background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
-                setColor(Color.parseColor("#2E7D32"))
+                setColor(ctx.getColor(R.color.float_btn_bookmark))
             }
         }
         stopButton?.let { button ->
             button.imageTintList = ColorStateList.valueOf(Color.WHITE)
             button.background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
-                setColor(Color.parseColor("#D32F2F"))
+                setColor(ctx.getColor(R.color.float_btn_stop_red))
             }
         }
     }

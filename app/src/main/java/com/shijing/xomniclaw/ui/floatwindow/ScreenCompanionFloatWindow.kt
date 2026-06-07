@@ -200,6 +200,7 @@ object ScreenCompanionFloatWindow {
 
     private fun render(state: ScreenCompanionController.ScreenCompanionUiState) {
         statusTextView?.text = state.statusText
+        val ctx = statusTextView?.context ?: return
         messageTextView?.let { messageView ->
             messageView.text = state.transientMessage
             // 固定保留消息行，避免替身悬浮窗在长条/短条之间来回跳变。
@@ -207,17 +208,17 @@ object ScreenCompanionFloatWindow {
         }
 
         voiceButton?.let { button ->
-            val backgroundColor = when {
-                state.isListening -> Color.parseColor("#E53935")
-                state.isAgentRunning -> Color.parseColor("#555555")
-                else -> Color.parseColor("#1E88E5")
+            val bgColorRes = when {
+                state.isListening -> R.color.float_btn_voice_listening
+                state.isAgentRunning -> R.color.float_btn_disabled
+                else -> R.color.float_btn_voice_default
             }
             button.isEnabled = !state.isAgentRunning || state.isListening
             button.alpha = if (button.isEnabled) 1.0f else 0.6f
             button.imageTintList = ColorStateList.valueOf(Color.WHITE)
             button.background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
-                setColor(backgroundColor)
+                setColor(ctx.getColor(bgColorRes))
             }
         }
 
@@ -225,7 +226,7 @@ object ScreenCompanionFloatWindow {
             button.imageTintList = ColorStateList.valueOf(Color.WHITE)
             button.background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
-                setColor(Color.parseColor("#7B1FA2"))
+                setColor(ctx.getColor(R.color.float_btn_stop_purple))
             }
         }
     }
