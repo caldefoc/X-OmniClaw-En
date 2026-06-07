@@ -25,7 +25,7 @@
                 android:id="@+id/tv_behavior_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="正在记录行为"
+                android:text="@string/recording_behavior"
                 android:textColor="#FFFFFFFF"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -37,7 +37,7 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="请开始操作，结束后点停止"
+                android:text="@string/recording_instruction"
                 android:textColor="#CCFFFFFF"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -48,7 +48,7 @@
             android:layout_height="40dp"
             android:layout_marginEnd="6dp"
             android:background="@android:color/transparent"
-            android:contentDescription="收藏当前页面"
+            android:contentDescription="@string/bookmark_page_desc"
             android:padding="8dp"
             android:src="@android:drawable/btn_star_big_on" />
 
@@ -57,7 +57,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:contentDescription="停止轨迹录制"
+            android:contentDescription="@string/stop_recording_desc"
             android:padding="8dp"
             android:src="@android:drawable/ic_media_pause" />
     </LinearLayout>

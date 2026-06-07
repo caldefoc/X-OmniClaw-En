@@ -45,7 +45,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🤖 模型配置"
+                            android:text="@string/model_config_card_title"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#000000" />
@@ -54,7 +54,7 @@
                             android:id="@+id/tv_current_model_summary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="管理 AI 服务商和模型"
+                            android:text="@string/model_config_card_desc"
                             android:textSize="12sp"
                             android:textColor="#666666"
                             android:layout_marginTop="4dp" />
@@ -64,7 +64,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_more"
-                        android:contentDescription="模型配置" />
+                        android:contentDescription="@string/model_config_content_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -86,7 +86,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="API 配置"
+                        android:text="@string/api_config_title"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#000000"
@@ -124,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="* 配置保存到 /sdcard/.xomniclaw/xomniclaw.json"
+                        android:text="@string/config_save_path"
                         android:textSize="12sp"
                         android:textColor="#999999"
                         android:layout_marginTop="8dp" />
@@ -148,7 +148,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="功能开关"
+                        android:text="@string/feature_toggle_title"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#000000"
@@ -177,7 +177,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="启用深度推理模式"
+                                android:text="@string/deep_reasoning_label"
                                 android:textSize="12sp"
                                 android:textColor="#666666"
                                 android:layout_marginTop="4dp" />
@@ -211,7 +211,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="探索模式 vs 计划模式"
+                                android:text="@string/explore_vs_plan_label"
                                 android:textSize="12sp"
                                 android:textColor="#666666"
                                 android:layout_marginTop="4dp" />
@@ -242,7 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gateway 配置"
+                        android:text="@string/gateway_config_title"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#000000"
@@ -251,7 +251,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="WebSocket 端口"
+                        android:hint="@string/websocket_port_hint"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -266,7 +266,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="* Gateway 在应用启动时自动运行"
+                        android:text="@string/gateway_auto_run"
                         android:textSize="12sp"
                         android:textColor="#999999"
                         android:layout_marginTop="8dp" />
@@ -301,7 +301,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="📚 Skills 管理"
+                            android:text="@string/skills_management_title"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#000000" />
@@ -309,7 +309,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="查看和管理 Agent 技能"
+                            android:text="@string/skills_management_desc"
                             android:textSize="12sp"
                             android:textColor="#666666"
                             android:layout_marginTop="4dp" />
@@ -319,7 +319,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_more"
-                        android:contentDescription="查看 Skills" />
+                        android:contentDescription="@string/skills_content_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -352,7 +352,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="📡 Channels 管理"
+                            android:text="@string/channels_management_title"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#000000" />
@@ -360,7 +360,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="管理飞书、Discord 等渠道"
+                            android:text="@string/channels_management_desc"
                             android:textSize="12sp"
                             android:textColor="#666666"
                             android:layout_marginTop="4dp" />
@@ -370,7 +370,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_more"
-                        android:contentDescription="查看 Channels" />
+                        android:contentDescription="@string/channels_content_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -403,7 +403,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🔄 检查更新"
+                            android:text="@string/check_update_title"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#000000" />
@@ -412,7 +412,7 @@
                             android:id="@+id/tv_current_version"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="当前版本: ..."
+                            android:text="@string/current_version_label"
                             android:textSize="12sp"
                             android:textColor="#666666"
                             android:layout_marginTop="4dp" />
@@ -422,7 +422,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_popup_sync"
-                        android:contentDescription="检查更新" />
+                        android:contentDescription="@string/check_update_content_desc" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -451,7 +451,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="恢复默认"
+                android:text="@string/reset_default_btn"
                 android:textSize="14sp" />
 
             <Button
@@ -461,7 +461,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="保存"
+                android:text="@string/save_btn"
                 android:textSize="14sp" />
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>

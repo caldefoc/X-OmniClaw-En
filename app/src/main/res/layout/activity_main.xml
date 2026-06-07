@@ -7,7 +7,7 @@
     android:background="#F5F5F5"
     tools:context="com.shijing.xomniclaw.ui.activity.MainActivity">
 
-    <!-- 主内容区 -->
+    <!-- Main content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +20,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- 标题栏 -->
+            <!-- Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="AI 移动自动化平台"
+                        android:text="@string/title_ai_platform"
                         android:textSize="14sp"
                         android:textColor="#666666" />
                 </LinearLayout>
@@ -65,7 +65,7 @@
                     android:textColor="#999999" />
             </LinearLayout>
 
-            <!-- Gateway 卡片 -->
+            <!-- Gateway card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_gateway"
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                             android:id="@+id/tv_gateway_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="运行中"
+                            android:text="@string/gateway_running"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
                             android:textColor="#4CAF50" />
@@ -125,11 +125,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_send"
-                        android:contentDescription="查看详情" />
+                        android:contentDescription="@string/view_details_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 权限卡片 -->
+            <!-- Permissions card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_permissions"
                 android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@android:drawable/ic_lock_lock"
-                        android:contentDescription="权限" />
+                        android:contentDescription="@string/permissions_title" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -161,7 +161,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="权限"
+                            android:text="@string/permissions_title"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="#000000" />
@@ -170,7 +170,7 @@
                             android:id="@+id/tv_permissions_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="已授权"
+                            android:text="@string/already_authorized"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
                             android:textColor="#4CAF50" />
@@ -179,7 +179,7 @@
                             android:id="@+id/tv_permissions_details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="无障碍: ✓  悬浮窗: ✓  录屏: ✓"
+                            android:text="@string/permission_summary"
                             android:textSize="12sp"
                             android:textColor="#999999"
                             android:layout_marginTop="4dp" />
@@ -189,11 +189,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_send"
-                        android:contentDescription="查看详情" />
+                        android:contentDescription="@string/view_details_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Skills 卡片 -->
+            <!-- Skills card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_skills"
                 android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                             android:id="@+id/tv_skills_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="8 个 Skills"
+                            android:text="@string/skills_count"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
                             android:textColor="#4CAF50" />
@@ -253,11 +253,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_send"
-                        android:contentDescription="查看详情" />
+                        android:contentDescription="@string/view_details_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Sessions 卡片 -->
+            <!-- Sessions card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_sessions"
                 android:layout_width="match_parent"
@@ -298,7 +298,7 @@
                             android:id="@+id/tv_sessions_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="无活跃会话"
+                            android:text="@string/no_active_session"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
                             android:textColor="#999999" />
@@ -307,7 +307,7 @@
                             android:id="@+id/tv_sessions_details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="暂无活跃的 Agent 会话"
+                            android:text="@string/no_session_desc"
                             android:textSize="12sp"
                             android:textColor="#999999"
                             android:layout_marginTop="4dp" />
@@ -317,14 +317,14 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@android:drawable/ic_menu_send"
-                        android:contentDescription="查看详情" />
+                        android:contentDescription="@string/view_details_desc" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- 底部导航栏 -->
+    <!-- Bottom navigation bar -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
@@ -345,7 +345,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="配置"
+                android:text="@string/nav_config"
                 android:textSize="14sp"
                 android:drawableTop="@android:drawable/ic_menu_manage"
                 android:drawablePadding="4dp" />
@@ -356,7 +356,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="检查更新"
+                android:text="@string/nav_check_update"
                 android:textSize="14sp"
                 android:drawableTop="@android:drawable/ic_menu_compass"
                 android:drawablePadding="4dp" />
@@ -367,7 +367,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="日志"
+                android:text="@string/nav_log"
                 android:textSize="14sp"
                 android:drawableTop="@android:drawable/ic_menu_info_details"
                 android:drawablePadding="4dp" />

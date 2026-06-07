@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#FFFFFF"
             app:navigationIcon="@drawable/ic_arrow_back_24"
-            app:title="STT Provider 配置"
+            app:title="@string/stt_provider_title"
             app:titleTextColor="#000000" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,7 +53,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📋 如何获取 STT API Key"
+                        android:text="@string/get_stt_api_key_howto"
                         android:textColor="#5D4037"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="3dp"
-                        android:text="1. 打开 SiliconFlow 控制台\n2. 登录并进入 API Keys 页面\n3. 创建新的 API Key\n4. 复制 Key 后粘贴到下方输入框"
+                        android:text="@string/stt_tutorial_steps"
                         android:textColor="#6D4C41"
                         android:textSize="12sp" />
 
@@ -73,7 +73,7 @@
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="打开获取页面 →"
+                        android:text="@string/open_stt_page"
                         android:textColor="#F57C00"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="STT API Key"
-                app:helperText="保存到 models.providers.stt.apiKey"
+                app:helperText="@string/stt_apikey_helper"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="STT URL"
-                app:helperText="保存到 models.providers.stt.baseUrl"
+                app:helperText="@string/stt_baseurl_helper"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -117,8 +117,8 @@
                 android:id="@+id/til_stt_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="STT 模型 ID"
-                app:helperText="保存到 models.providers.stt.models[0].id"
+                android:hint="@string/stt_model_hint"
+                app:helperText="@string/stt_model_helper"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -137,6 +137,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
-        android:text="保存并使用"
+        android:text="@string/save_stt_btn"
         android:textSize="16sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#FFFFFF"
             app:navigationIcon="@drawable/ic_arrow_back_24"
-            app:title="模型配置"
+            app:title="@string/model_config_title"
             app:titleTextColor="#000000" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -64,7 +64,7 @@
                             android:id="@+id/tv_current_stt_summary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="STT：未配置"
+                            android:text="@string/stt_not_configured"
                             android:textColor="#2E7D32"
                             android:textSize="13sp" />
 
@@ -73,7 +73,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="VLM：与 Agent 大模型一致"
+                            android:text="@string/vlm_same_as_agent"
                             android:textColor="#2E7D32"
                             android:textSize="13sp" />
 
@@ -82,7 +82,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Agent：未配置"
+                            android:text="@string/agent_not_configured"
                             android:textColor="#2E7D32"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="未配置"
+                                android:text="@string/not_configured"
                                 android:textColor="#666666"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -177,7 +177,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="未配置"
+                                android:text="@string/not_configured"
                                 android:textColor="#666666"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -254,7 +254,7 @@
                         android:id="@+id/tv_provider_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="已配置"
+                        android:text="@string/configured"
                         android:textColor="#4CAF50"
                         android:textSize="12sp"
                         android:visibility="gone" />
@@ -297,7 +297,7 @@
                             android:id="@+id/tv_tutorial_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="📋 如何获取 API Key？"
+                            android:text="@string/get_api_key_howto"
                             android:textColor="#E65100"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -316,7 +316,7 @@
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="打开网页 →"
+                            android:text="@string/open_webpage"
                             android:textColor="#E65100"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -327,7 +327,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="选择模型"
+                    android:text="@string/select_model"
                     android:textColor="#333333"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -346,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="✏️ 手动添加模型"
+                    android:text="@string/add_model_manually"
                     android:textSize="12sp" />
 
                 <!-- Advanced Section (collapsed) -->
@@ -373,7 +373,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="高级选项"
+                            android:text="@string/advanced_options"
                             android:textColor="#666666"
                             android:textSize="13sp" />
 
@@ -383,7 +383,7 @@
                             android:layout_height="20dp"
                             android:rotation="0"
                             android:src="@drawable/ic_expand_more_24"
-                            android:contentDescription="展开" />
+                            android:contentDescription="@string/expand_desc" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -417,7 +417,7 @@
                         android:id="@+id/til_api_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="API 类型"
+                        android:hint="@string/api_type_hint"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                         <AutoCompleteTextView
@@ -440,7 +440,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="16dp"
             android:padding="12dp"
-            android:text="保存并使用"
+            android:text="@string/save_and_use"
             android:textSize="16sp" />
 
     </FrameLayout>
