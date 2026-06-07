@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="?colorSurface"
     tools:context="com.shijing.xomniclaw.ui.activity.MainActivity">
 
     <!-- Main content -->
@@ -47,14 +47,14 @@
                         android:text="PhoneForClaw"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="#000000" />
+                        android:textColor="?android:attr/textColorPrimary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_ai_platform"
                         android:textSize="14sp"
-                        android:textColor="#666666" />
+                        android:textColor="@color/text_secondary" />
                 </LinearLayout>
 
                 <TextView
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:text="v2.4.3"
                     android:textSize="12sp"
-                    android:textColor="#999999" />
+                    android:textColor="@color/text_secondary" />
             </LinearLayout>
 
             <!-- Gateway card -->
@@ -100,7 +100,7 @@
                             android:text="Gateway"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#000000" />
+                            android:textColor="?android:attr/textColorPrimary" />
 
                         <TextView
                             android:id="@+id/tv_gateway_status"
@@ -109,7 +109,7 @@
                             android:text="@string/gateway_running"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
-                            android:textColor="#4CAF50" />
+                            android:textColor="@color/status_ok" />
 
                         <TextView
                             android:id="@+id/tv_gateway_details"
@@ -117,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:text="WebSocket: ws://0.0.0.0:8765"
                             android:textSize="12sp"
-                            android:textColor="#999999"
+                            android:textColor="@color/text_secondary"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
 
@@ -164,7 +164,7 @@
                             android:text="@string/permissions_title"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#000000" />
+                            android:textColor="?android:attr/textColorPrimary" />
 
                         <TextView
                             android:id="@+id/tv_permissions_status"
@@ -173,7 +173,7 @@
                             android:text="@string/already_authorized"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
-                            android:textColor="#4CAF50" />
+                            android:textColor="@color/status_ok" />
 
                         <TextView
                             android:id="@+id/tv_permissions_details"
@@ -181,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/permission_summary"
                             android:textSize="12sp"
-                            android:textColor="#999999"
+                            android:textColor="@color/text_secondary"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
 
@@ -228,7 +228,7 @@
                             android:text="Skills"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#000000" />
+                            android:textColor="?android:attr/textColorPrimary" />
 
                         <TextView
                             android:id="@+id/tv_skills_status"
@@ -237,7 +237,7 @@
                             android:text="@string/skills_count"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
-                            android:textColor="#4CAF50" />
+                            android:textColor="@color/status_ok" />
 
                         <TextView
                             android:id="@+id/tv_skills_details"
@@ -245,7 +245,7 @@
                             android:layout_height="wrap_content"
                             android:text="Always: 3  On-Demand: 5  Bundled: 8"
                             android:textSize="12sp"
-                            android:textColor="#999999"
+                            android:textColor="@color/text_secondary"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
 
@@ -292,7 +292,7 @@
                             android:text="Sessions"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#000000" />
+                            android:textColor="?android:attr/textColorPrimary" />
 
                         <TextView
                             android:id="@+id/tv_sessions_status"
@@ -301,7 +301,7 @@
                             android:text="@string/no_active_session"
                             android:textSize="14sp"
                             android:layout_marginTop="4dp"
-                            android:textColor="#999999" />
+                            android:textColor="@color/text_secondary" />
 
                         <TextView
                             android:id="@+id/tv_sessions_details"
@@ -309,7 +309,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/no_session_desc"
                             android:textSize="12sp"
-                            android:textColor="#999999"
+                            android:textColor="@color/text_secondary"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
 
@@ -330,7 +330,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#FFFFFF">
+        app:backgroundTint="?colorSurface">
 
         <LinearLayout
             android:layout_width="match_parent"

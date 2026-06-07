@@ -29,7 +29,7 @@
                 android:text="📄 Skill Name"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textColor="?android:attr/textColorPrimary" />
 
             <!-- 自动加载标记 -->
             <TextView
@@ -64,7 +64,7 @@
             android:layout_marginTop="8dp"
             android:text="Skill description goes here"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/text_secondary"
             android:maxLines="2"
             android:ellipsize="end" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:text="🏷️ automation"
                 android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/text_secondary"
                 android:visibility="gone" />
 
         </LinearLayout>

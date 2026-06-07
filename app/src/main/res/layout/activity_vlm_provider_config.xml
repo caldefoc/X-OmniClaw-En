@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="?colorSurface"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
+            android:background="?colorSurface"
             app:navigationIcon="@drawable/ic_arrow_back_24"
             app:title="@string/vlm_provider_title"
-            app:titleTextColor="#000000" />
+            app:titleTextColor="?android:attr/textColorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -38,10 +38,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#EEF3FF"
+                app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#C9D7FF"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/get_vlm_api_key_howto"
-                        android:textColor="#1A237E"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="3dp"
                         android:text="@string/vlm_instructions"
-                        android:textColor="#3949AB"
+                        android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -83,7 +83,7 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/vlm_same_as_agent_desc"
-                android:textColor="#5C6BC0"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
             <LinearLayout

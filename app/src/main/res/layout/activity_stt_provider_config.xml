@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="?colorSurface"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
+            android:background="?colorSurface"
             app:navigationIcon="@drawable/ic_arrow_back_24"
             app:title="@string/stt_provider_title"
-            app:titleTextColor="#000000" />
+            app:titleTextColor="?android:attr/textColorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -38,10 +38,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#FFF8E1"
+                app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#FFE082"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/get_stt_api_key_howto"
-                        android:textColor="#5D4037"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="3dp"
                         android:text="@string/stt_tutorial_steps"
-                        android:textColor="#6D4C41"
+                        android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
                     <com.google.android.material.button.MaterialButton
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/open_stt_page"
-                        android:textColor="#F57C00"
+                        android:textColor="@color/status_warning"
                         android:textSize="12sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="?colorSurface"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
+            android:background="?colorSurface"
             app:navigationIcon="@drawable/ic_arrow_back_24"
             app:title="@string/model_config_title"
-            app:titleTextColor="#000000" />
+            app:titleTextColor="?android:attr/textColorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,10 +47,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#E8F5E9"
+                    app:cardBackgroundColor="?colorSurface"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeColor="#4CAF50"
+                    app:strokeColor="@color/green"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -65,7 +65,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/stt_not_configured"
-                            android:textColor="#2E7D32"
+                            android:textColor="@color/status_ok"
                             android:textSize="13sp" />
 
                         <TextView
@@ -74,7 +74,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="@string/vlm_same_as_agent"
-                            android:textColor="#2E7D32"
+                            android:textColor="@color/status_ok"
                             android:textSize="13sp" />
 
                         <TextView
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="@string/agent_not_configured"
-                            android:textColor="#2E7D32"
+                            android:textColor="@color/status_ok"
                             android:textSize="13sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -117,7 +117,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="🎙️ STT Provider"
-                                android:textColor="#000000"
+                                android:textColor="?android:attr/textColorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -127,7 +127,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/not_configured"
-                                android:textColor="#666666"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -168,7 +168,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="🖼️ VLM Provider"
-                                android:textColor="#000000"
+                                android:textColor="?android:attr/textColorPrimary"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -178,7 +178,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/not_configured"
-                                android:textColor="#666666"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -196,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="🤖 Agent Provider"
-                    android:textColor="#333333"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -246,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="OpenRouter"
-                        android:textColor="#000000"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -255,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/configured"
-                        android:textColor="#4CAF50"
+                        android:textColor="@color/status_ok"
                         android:textSize="12sp"
                         android:visibility="gone" />
                 </LinearLayout>
@@ -283,7 +283,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#FFF3E0"
+                    app:cardBackgroundColor="?colorSurface"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="0dp">
 
@@ -298,7 +298,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/get_api_key_howto"
-                            android:textColor="#E65100"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
@@ -307,7 +307,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textColor="#BF360C"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp"
                             android:lineSpacingExtra="4dp" />
 
@@ -317,7 +317,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/open_webpage"
-                            android:textColor="#E65100"
+                            android:textColor="@color/primary_color"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -328,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@string/select_model"
-                    android:textColor="#333333"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -359,8 +359,8 @@
                     android:focusable="true"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="#F5F5F5"
-                    app:rippleColor="#20000000">
+                    app:cardBackgroundColor="?colorSurface"
+                    app:rippleColor="?attr/colorOnSurface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -374,7 +374,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/advanced_options"
-                            android:textColor="#666666"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
 
                         <ImageView
