@@ -85,7 +85,7 @@
             android:name="com.shijing.xomniclaw.ui.activity.MainActivityCompose"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -98,77 +98,77 @@
             android:name="com.shijing.xomniclaw.ui.activity.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- 模型配置引导页（首次启动） -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.ModelSetupActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- 模型配置页面（两页式） -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.ModelConfigActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- STT Provider 配置页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.SttProviderConfigActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- VLM Provider 配置页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.VlmProviderConfigActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- 配置页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.ConfigActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- Skills 管理页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.SkillsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- 权限管理页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.PermissionsActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- Channel 列表页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.ChannelListActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- Feishu Channel 配置页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.FeishuChannelActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- Discord Channel 配置页面 -->
         <activity
             android:name="com.shijing.xomniclaw.ui.activity.DiscordChannelActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.PhoneForClaw.NoActionBar" />
 
         <!-- 结果Activity -->
         <activity

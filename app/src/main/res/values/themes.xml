@@ -3,10 +3,17 @@
         <item name="colorPrimary">@color/green</item>
         <item name="colorSecondary">@color/green</item>
         <item name="colorSurface">@android:color/white</item>
+        <item name="colorOutline">#E0E0E0</item>
+        <item name="colorOnSurface">#000000</item>
         <item name="android:windowBackground">?colorSurface</item>
         <item name="android:statusBarColor">?colorPrimary</item>
         <item name="android:navigationBarColor">?colorSurface</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="fontFamily">monospace</item>
+    </style>
+
+    <style name="Theme.PhoneForClaw.NoActionBar" parent="Theme.PhoneForClaw">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>
