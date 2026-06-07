@@ -681,6 +681,7 @@ private fun ChatSessionSidebar(
     onCollapseSidebar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val isDark = isSystemInDarkTheme()
     Surface(
         modifier = modifier,
         color = chatSidebarBg(),
@@ -737,7 +738,7 @@ private fun ChatSessionSidebar(
             Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = "历史会话",
-                style = TextStyle(fontSize = 12.sp, color = onSurfaceSecondary()
+                style = TextStyle(fontSize = 12.sp, color = onSurfaceSecondary())
             )
             Spacer(modifier = Modifier.height(6.dp))
             LazyColumn(
@@ -1111,12 +1112,12 @@ private fun ChatImageThumbnail(
             ?.let { BitmapFactory.decodeFile(it.absolutePath) }
     }
 
+    val isDark = isSystemInDarkTheme()
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(12.dp),
-    val isDark = isSystemInDarkTheme()
         color = if (isDark) Color(0xFF2A2A3E) else Color(0xFFF3F4F6)
     ) {
         if (bitmap != null) {
@@ -1725,6 +1726,7 @@ private fun AgentRoundTraceCard(
     onToggleExpanded: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val isDark = isSystemInDarkTheme()
     val latest = steps.lastOrNull()
     val summary = stripInlineStepPrefix(latest?.content.orEmpty())
         .lineSequence()
