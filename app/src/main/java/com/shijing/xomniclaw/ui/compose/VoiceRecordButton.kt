@@ -20,6 +20,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.isSystemInDarkTheme
 
 /**
  * 按住录音按钮
@@ -45,8 +46,9 @@ fun VoiceRecordButton(
         label = "pulseScale"
     )
 
-    val bgColor = if (isListening) Color(0xFFFF3B30) else Color(0xFFE0E0E0)
-    val iconTint = if (isListening) Color.White else Color(0xFF666666)
+    val isDark = isSystemInDarkTheme()
+    val bgColor = if (isListening) Color(0xFFFF3B30) else if (isDark) Color(0xFF3A3A4E) else Color(0xFFE0E0E0)
+    val iconTint = if (isListening) Color.White else if (isDark) Color(0xFFBDBDBD) else Color(0xFF666666)
     val scaleValue = if (isListening) pulseScale else 1f
 
     Column(

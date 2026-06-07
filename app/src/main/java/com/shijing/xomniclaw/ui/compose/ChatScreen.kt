@@ -56,6 +56,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
@@ -125,11 +126,44 @@ enum class ChatMessageKind {
 /** Max chars before collapsing */
 private const val COLLAPSE_THRESHOLD = 300
 
-// CoPaw 风格主色：浅灰侧栏 + 紫强调色
+// CoPaw 风格主色：紫强调色（深色模式下不变，保持品牌识别度）
 private val ChatPurple = Color(0xFF7C3AED)
-private val ChatSidebarBg = Color(0xFFF3F4F6)
-private val ChatSurface = Color(0xFFFFFFFF)
-private val ChatDivider = Color(0xFFE5E7EB)
+
+@Composable
+private fun chatSidebarBg(): Color {
+    val isDark = isSystemInDarkTheme()
+    return if (isDark) Color(0xFF1E1E2E) else Color(0xFFF3F4F6)
+}
+
+@Composable
+private fun chatSurfaceColor(): Color {
+    val isDark = isSystemInDarkTheme()
+    return if (isDark) Color(0xFF1A1A2E) else Color(0xFFFFFFFF)
+}
+
+@Composable
+private fun chatDividerColor(): Color {
+    val isDark = isSystemInDarkTheme()
+    return if (isDark) Color(0xFF2D2D3E) else Color(0xFFE5E7EB)
+}
+
+@Composable
+private fun onSurfacePrimary(): Color {
+    val isDark = isSystemInDarkTheme()
+    return if (isDark) Color(0xFFE0E0E0) else Color(0xFF111827)
+}
+
+@Composable
+private fun onSurfaceSecondary(): Color {
+    val isDark = isSystemInDarkTheme()
+    return if (isDark) Color(0xFFAAAAAA) else Color(0xFF6B7280)
+}
+
+@Composable
+private fun onSurfaceTertiary(): Color {
+    val isDark = isSystemInDarkTheme()
+    return if (isDark) Color(0xFF888888) else Color(0xFF9CA3AF)
+}
 
 /** 以横向条展示的「工具/思考」类时间线，与普通气泡区分 */
 private val TimelineBarKinds = setOf(
@@ -245,6 +279,7 @@ fun ChatScreen(
     showCameraPreview: Boolean = false,
     cameraPreviewContent: (@Composable () -> Unit)? = null
 ) {
+    val isDark = isSystemInDarkTheme()
     var inputText by remember { mutableStateOf("") }
     // 顶部会话下拉框展开态：用下拉替代左侧固定栏，给主对话更多空间。
     var sessionMenuExpanded by remember { mutableStateOf(false) }
@@ -297,7 +332,7 @@ fun ChatScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(ChatSurface)
+                .background(chatSurfaceColor())
         ) {
             // 顶部：会话下拉 + 新对话/更新，替代左侧会话栏以释放主区空间。
             Row(
@@ -330,7 +365,7 @@ fun ChatScreen(
                         Icon(
                             imageVector = Icons.Default.ExpandMore,
                             contentDescription = "选择会话",
-                            tint = Color(0xFF6B7280)
+                            tint = onSurfaceSecondary()
                         )
                     }
                     DropdownMenu(
@@ -350,7 +385,7 @@ fun ChatScreen(
                                             text = formatSessionTime(session.createdAt),
                                             style = TextStyle(
                                                 fontSize = 11.sp,
-                                                color = Color(0xFF9CA3AF)
+                                                color = onSurfaceTertiary()
                                             )
                                         )
                                     }
@@ -531,13 +566,13 @@ fun ChatScreen(
                             style = TextStyle(
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Color(0xFF111827)
+                                color = onSurfacePrimary()
                             )
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "向 AI 助手发送消息来控制手机",
-                            style = TextStyle(fontSize = 14.sp, color = Color(0xFF6B7280))
+                            style = TextStyle(fontSize = 14.sp, color = onSurfaceSecondary())
                         )
                     }
                 } else {
@@ -570,7 +605,7 @@ fun ChatScreen(
                 }
             }
 
-            Divider(color = ChatDivider, thickness = 1.dp)
+            Divider(color = chatDividerColor(), thickness = 1.dp)
 
             // Message input box (含摄像头按钮 + 发送/停止按钮)
             MessageComposer(
@@ -616,7 +651,7 @@ private fun CollapsedChatSidebarRail(
         modifier = modifier
             .width(52.dp)
             .fillMaxHeight(),
-        color = ChatSidebarBg,
+        color = chatSidebarBg(),
         shadowElevation = 0.dp
     ) {
         Column(
@@ -648,7 +683,7 @@ private fun ChatSessionSidebar(
 ) {
     Surface(
         modifier = modifier,
-        color = ChatSidebarBg,
+        color = chatSidebarBg(),
         shadowElevation = 0.dp
     ) {
         Column(
@@ -668,7 +703,7 @@ private fun ChatSessionSidebar(
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowLeft,
                         contentDescription = "收起会话列表",
-                        tint = Color(0xFF6B7280)
+                        tint = onSurfaceSecondary()
                     )
                 }
                 Text(
@@ -676,7 +711,7 @@ private fun ChatSessionSidebar(
                     style = TextStyle(
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF111827)
+                        color = onSurfacePrimary()
                     ),
                     modifier = Modifier.weight(1f),
                     maxLines = 1,
@@ -702,7 +737,7 @@ private fun ChatSessionSidebar(
             Spacer(modifier = Modifier.height(12.dp))
             Text(
                 text = "历史会话",
-                style = TextStyle(fontSize = 12.sp, color = Color(0xFF6B7280))
+                style = TextStyle(fontSize = 12.sp, color = onSurfaceSecondary()
             )
             Spacer(modifier = Modifier.height(6.dp))
             LazyColumn(
@@ -731,12 +766,12 @@ private fun ChatSessionSidebar(
                                     style = TextStyle(
                                         fontSize = 14.sp,
                                         fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
-                                        color = if (selected) ChatPurple else Color(0xFF374151)
+                                        color = if (selected) ChatPurple else if (isDark) Color(0xFFCCCCCC) else Color(0xFF374151)
                                     )
                                 )
                                 Text(
                                     text = formatSessionTime(session.createdAt),
-                                    style = TextStyle(fontSize = 11.sp, color = Color(0xFF9CA3AF))
+                                    style = TextStyle(fontSize = 11.sp, color = onSurfaceTertiary())
                                 )
                             }
                         }
@@ -757,6 +792,7 @@ private fun ExpandableToolTimelineItem(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember(message.id) { mutableStateOf(false) }
+    val isDark = isSystemInDarkTheme()
     val (_, textColor) = messageColors(message)
     val label = messageTimelineLabel(message.kind) ?: "步骤"
     val cleaned = remember(message.content) { ChatMediaParser.extract(message.content).cleanedText }
@@ -772,8 +808,8 @@ private fun ExpandableToolTimelineItem(
                 .fillMaxWidth()
                 .clickable { expanded = !expanded },
             shape = RoundedCornerShape(10.dp),
-            color = Color(0xFFF9FAFB),
-            border = BorderStroke(1.dp, Color(0xFFE5E7EB))
+            color = if (isDark) Color(0xFF2A2A3E) else Color(0xFFF9FAFB),
+            border = BorderStroke(1.dp, if (isDark) Color(0xFF3A3A4E) else Color(0xFFE5E7EB))
         ) {
             Column(Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -790,13 +826,13 @@ private fun ExpandableToolTimelineItem(
                         style = TextStyle(
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF374151)
+                            color = if (isDark) Color(0xFFCCCCCC) else Color(0xFF374151)
                         )
                     )
                     Icon(
                         imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                         contentDescription = null,
-                        tint = Color(0xFF9CA3AF),
+                        tint = if (isDark) Color(0xFF888888) else Color(0xFF9CA3AF),
                         modifier = Modifier.size(20.dp)
                     )
                 }
@@ -811,7 +847,7 @@ private fun ExpandableToolTimelineItem(
                         text = oneLine,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        style = TextStyle(fontSize = 13.sp, color = Color(0xFF6B7280))
+                        style = TextStyle(fontSize = 13.sp, color = if (isDark) Color(0xFFAAAAAA) else Color(0xFF6B7280))
                     )
                 }
             }
@@ -893,7 +929,7 @@ fun MessageItem(
                         Text(
                             text = timelineLabel,
                             style = TextStyle(
-                                color = Color(0xFF6B7280),
+                                color = onSurfaceTertiary(),
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
@@ -1013,7 +1049,9 @@ fun MessageItem(
     }
 }
 
+@Composable
 private fun messageColors(message: ChatMessage): Pair<Color, Color> {
+    val isDark = isSystemInDarkTheme()
     if (message.isUser) {
         // 浅紫气泡 + 深色字，贴近参考图用户消息样式
         return Color(0xFFE9D5FF) to Color(0xFF1E1B4B)
@@ -1022,9 +1060,15 @@ private fun messageColors(message: ChatMessage): Pair<Color, Color> {
         ChatMessageKind.TOOL_CALL -> Color(0xFFF3E8FF) to Color(0xFF4C1D95)
         ChatMessageKind.TOOL_RESULT -> Color(0xFFECFDF3) to Color(0xFF166534)
         ChatMessageKind.ERROR -> Color(0xFFFEE2E2) to Color(0xFF991B1B)
-        ChatMessageKind.THINKING -> Color(0xFFF3F4F6) to Color(0xFF374151)
+        ChatMessageKind.THINKING -> {
+            if (isDark) Color(0xFF2A2A3E) to Color(0xFFCCCCCC)
+            else Color(0xFFF3F4F6) to Color(0xFF374151)
+        }
         ChatMessageKind.SYSTEM -> Color(0xFFEFF6FF) to Color(0xFF1D4ED8)
-        else -> Color.White to Color(0xFF1A1A1A)
+        else -> {
+            if (isDark) Color(0xFF2A2A3E) to Color(0xFFE0E0E0)
+            else Color.White to Color(0xFF1A1A1A)
+        }
     }
 }
 
@@ -1072,7 +1116,8 @@ private fun ChatImageThumbnail(
             .fillMaxWidth()
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(12.dp),
-        color = Color(0xFFF3F4F6)
+    val isDark = isSystemInDarkTheme()
+        color = if (isDark) Color(0xFF2A2A3E) else Color(0xFFF3F4F6)
     ) {
         if (bitmap != null) {
             Image(
@@ -1086,7 +1131,7 @@ private fun ChatImageThumbnail(
         } else {
             Text(
                 text = "图片不存在或无法读取\n${media.normalizedPath}",
-                style = TextStyle(fontSize = 13.sp, color = Color(0xFF666666)),
+                style = TextStyle(fontSize = 13.sp, color = if (isDark) Color(0xFF888888) else Color(0xFF666666)),
                 modifier = Modifier.padding(12.dp)
             )
         }
@@ -1098,22 +1143,23 @@ private fun ChatVideoCard(
     media: ChatMediaRef,
     onClick: () -> Unit
 ) {
+    val isDark = isSystemInDarkTheme()
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(12.dp),
-        color = Color(0xFFF3F4F6)
+        color = if (isDark) Color(0xFF2A2A3E) else Color(0xFFF3F4F6)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
                 text = "视频预览",
-                style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1A1A1A))
+                style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold, color = if (isDark) Color(0xFFE0E0E0) else Color(0xFF1A1A1A))
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = media.normalizedPath,
-                style = TextStyle(fontSize = 12.sp, color = Color(0xFF666666))
+                style = TextStyle(fontSize = 12.sp, color = if (isDark) Color(0xFF888888) else Color(0xFF666666))
             )
             Spacer(modifier = Modifier.height(6.dp))
                 Text(
@@ -1443,9 +1489,10 @@ fun MessageComposer(
         }
     }
 
+    val isDark = isSystemInDarkTheme()
     Surface(
         modifier = modifier,
-        color = Color.White,
+        color = if (isDark) Color(0xFF252540) else Color.White,
         shadowElevation = 4.dp
     ) {
         Row(
@@ -1471,13 +1518,13 @@ fun MessageComposer(
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(CircleShape)
-                            .background(Color(0xFFE0E0E0)),
+                            .background(if (isDark) Color(0xFF3A3A4E) else Color(0xFFE0E0E0)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = if (isVoiceMode) Icons.Default.Keyboard else Icons.Default.Mic,
                             contentDescription = if (isVoiceMode) "切换键盘输入" else "切换语音输入",
-                            tint = Color(0xFF666666),
+                            tint = if (isDark) Color(0xFFBDBDBD) else Color(0xFF666666),
                             modifier = Modifier.size(20.dp)
                         )
                     }
@@ -1491,10 +1538,10 @@ fun MessageComposer(
                     .weight(1f)
                     .heightIn(min = 44.dp, max = 120.dp),
                 shape = RoundedCornerShape(24.dp),
-                color = Color(0xFFF7F7F7),
+                color = if (isDark) Color(0xFF2A2A3E) else Color(0xFFF7F7F7),
                 border = androidx.compose.foundation.BorderStroke(
                     width = 1.dp,
-                    color = Color(0xFFE0E0E0)
+                    color = if (isDark) Color(0xFF3A3A4E) else Color(0xFFE0E0E0)
                 )
             ) {
                 if (isVoiceMode && canVoiceInput) {
@@ -1507,7 +1554,7 @@ fun MessageComposer(
                                 when {
                                     isVoiceListening -> Color(0xFFFFEBEE)
                                     isVoiceProcessing -> Color(0xFFE8F0FE)
-                                    else -> Color.White
+                                    else -> if (isDark) Color(0xFF2A2A3E) else Color.White
                                 }
                             )
                             .pointerInput(Unit) {
@@ -1536,7 +1583,7 @@ fun MessageComposer(
                                 color = when {
                                     isVoiceListening -> Color(0xFFFF3B30)
                                     isVoiceProcessing -> Color(0xFF1A73E8)
-                                    else -> Color(0xFF666666)
+                                    else -> if (isDark) Color(0xFFBDBDBD) else Color(0xFF666666)
                                 },
                                 fontWeight = FontWeight.Medium
                             )
@@ -1553,7 +1600,7 @@ fun MessageComposer(
                             .testTag("chat_input"),
                         textStyle = TextStyle(
                             fontSize = 15.sp,
-                            color = Color.Black,
+                            color = if (isDark) Color(0xFFE0E0E0) else Color.Black,
                             lineHeight = 20.sp
                         ),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
@@ -1570,7 +1617,7 @@ fun MessageComposer(
                                 if (value.isEmpty()) {
                                     Text(
                                         text = "发送消息",
-                                        style = TextStyle(fontSize = 15.sp, color = Color(0xFF999999))
+                                        style = TextStyle(fontSize = 15.sp, color = if (isDark) Color(0xFF777777) else Color(0xFF999999))
                                     )
                                 }
                                 innerTextField()
@@ -1623,7 +1670,7 @@ fun MessageComposer(
                 Surface(
                     modifier = Modifier.size(44.dp),
                     shape = CircleShape,
-                    color = Color(0xFFE0E0E0),
+                    color = if (isDark) Color(0xFF3A3A4E) else Color(0xFFE0E0E0),
                     onClick = {
                         onCameraClick?.invoke()
                     }
@@ -1632,7 +1679,7 @@ fun MessageComposer(
                         Icon(
                             imageVector = Icons.Default.Add,
                             contentDescription = "更多功能",
-                            tint = Color(0xFF666666),
+                            tint = if (isDark) Color(0xFFBDBDBD) else Color(0xFF666666),
                             modifier = Modifier.size(20.dp)
                         )
                     }
@@ -1701,13 +1748,13 @@ private fun AgentRoundTraceCard(
             ) {
                 Surface(
                     shape = RoundedCornerShape(999.dp),
-                    color = Color(0xFFEEF2FF)
+                    color = if (isDark) Color(0xFF2A2A4E) else Color(0xFFEEF2FF)
                 ) {
                     Text(
                         text = "第 ${roundIndex.coerceAtLeast(1)} 轮",
                         style = TextStyle(
                             fontSize = 11.sp,
-                            color = Color(0xFF4338CA),
+                            color = if (isDark) Color(0xFF90CAF9) else Color(0xFF4338CA),
                             fontWeight = FontWeight.SemiBold
                         ),
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
@@ -1719,7 +1766,7 @@ private fun AgentRoundTraceCard(
                     modifier = Modifier.weight(1f),
                     style = TextStyle(
                         fontSize = 13.sp,
-                        color = Color(0xFF1F2937),
+                        color = if (isDark) Color(0xFFCCCCCC) else Color(0xFF1F2937),
                         fontWeight = FontWeight.Bold
                     )
                 )
@@ -1727,7 +1774,7 @@ private fun AgentRoundTraceCard(
                     Icon(
                         imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                         contentDescription = if (expanded) "收起执行轨迹" else "展开执行轨迹",
-                        tint = Color(0xFF94A3B8),
+                        tint = if (isDark) Color(0xFF888888) else Color(0xFF94A3B8),
                         modifier = Modifier.size(18.dp)
                     )
                 }
@@ -1739,7 +1786,7 @@ private fun AgentRoundTraceCard(
                     text = "最近一步：${summary.ifBlank { "暂无摘要" }}",
                     style = TextStyle(
                         fontSize = 12.sp,
-                        color = Color(0xFF64748B)
+                        color = if (isDark) Color(0xFFAAAAAA) else Color(0xFF64748B)
                     )
                 )
             } else {
@@ -1764,6 +1811,7 @@ private fun AgentTraceStepRow(
     message: ChatMessage,
     modifier: Modifier = Modifier
 ) {
+    val isDark = isSystemInDarkTheme()
     val (_, textColor) = messageColors(message)
     val title = messageTimelineLabel(message.kind) ?: "步骤"
     val cleanedContent = remember(message.content) {
@@ -1772,20 +1820,20 @@ private fun AgentTraceStepRow(
     Surface(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
-        color = Color.White,
-        border = BorderStroke(1.dp, Color(0xFFE5E7EB))
+        color = if (isDark) Color(0xFF2A2A3E) else Color.White,
+        border = BorderStroke(1.dp, if (isDark) Color(0xFF3A3A4E) else Color(0xFFE5E7EB))
     ) {
         Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Surface(
                     shape = RoundedCornerShape(999.dp),
-                    color = Color(0xFFEEF2FF)
+                    color = if (isDark) Color(0xFF2A2A4E) else Color(0xFFEEF2FF)
                 ) {
                     Text(
                         text = "Step $stepIndex",
                         style = TextStyle(
                             fontSize = 10.sp,
-                            color = Color(0xFF3730A3),
+                            color = if (isDark) Color(0xFF90CAF9) else Color(0xFF3730A3),
                             fontWeight = FontWeight.SemiBold
                         ),
                         modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp)
@@ -1796,7 +1844,7 @@ private fun AgentTraceStepRow(
                     text = title,
                     style = TextStyle(
                         fontSize = 12.sp,
-                        color = Color(0xFF374151),
+                        color = if (isDark) Color(0xFFCCCCCC) else Color(0xFF374151),
                         fontWeight = FontWeight.Medium
                     )
                 )

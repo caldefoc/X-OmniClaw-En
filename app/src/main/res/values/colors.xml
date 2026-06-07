@@ -15,4 +15,21 @@
     <color name="status_warning">#FFC107</color> <!-- 黄色 - 警告 -->
     <color name="status_error">#F44336</color>   <!-- 红色 - 错误 -->
     <color name="text_secondary">#666666</color> <!-- 次要文本 -->
+
+    <!-- 暗色背景覆盖层颜色（悬浮窗等） -->
+    <color name="overlay_background_dark">#CC111111</color>
+    <color name="overlay_background_darker">#B3000000</color>
+
+    <!-- 标签/标记颜色 -->
+    <color name="tag_background">#33B5E5</color>
+    <color name="tag_text_color">#FFFFFF</color>
+    <color name="tag_auto_text">#0066CC</color>
+
+    <!-- 文本颜色 -->
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_white_translucent">#CCFFFFFF</color>
+    <color name="text_primary">#000000</color>
+
+    <!-- 按钮/图标颜色 -->
+    <color name="icon_primary">#666666</color>
 </resources>

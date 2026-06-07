@@ -4,7 +4,7 @@
     android:id="@+id/card_companion_root"
     android:layout_width="196dp"
     android:layout_height="72dp"
-    app:cardBackgroundColor="#CC111111"
+    app:cardBackgroundColor="@color/overlay_background_dark"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
@@ -38,7 +38,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@string/hold_to_speak"
-                    android:textColor="#FFFFFFFF"
+                    android:textColor="@color/text_white"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                     android:layout_marginTop="4dp"
                     android:ellipsize="end"
                     android:maxLines="6"
-                    android:textColor="#CCFFFFFF"
+                    android:textColor="@color/text_white_translucent"
                     android:textSize="11sp"
                     android:visibility="invisible" />
             </LinearLayout>
