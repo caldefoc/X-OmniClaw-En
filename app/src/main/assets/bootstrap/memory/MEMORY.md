@@ -1,27 +1,27 @@
-# X-OmniClaw 全局记忆
+# X-OmniClaw Global Memory
 
-此文件保存用户使用 X-OmniClaw 执行任务过程中沉淀的长期记忆，包括使用习惯、稳定工作流、失败经验与重要项目上下文。
-普通任务结束时只记录待处理事件；正式更新长期记忆和用户画像由全局记忆进化定时任务统一完成。
+This file stores long-term memory accumulated while using X-OmniClaw for tasks, including usage habits, stable workflows, failure experiences, and important project context.
+At the end of normal tasks, only pending events are recorded; formal long-term memory and user profile updates are handled by the global memory evolution scheduled task.
 
-## 用户偏好与习惯
+## User Preferences and Habits
 
-- 暂无稳定记忆。
+- No stable memories yet.
 
-## X-OmniClaw 任务经验与工作流
+## X-OmniClaw Task Experience and Workflows
 
-- 暂无稳定记忆。
+- No stable memories yet.
 
-## 失败经验与绕过方式
+## Failure Experiences and Workarounds
 
-- 暂无稳定记忆。
+- No stable memories yet.
 
-## 长期项目上下文
+## Long-term Project Context
 
-- 暂无稳定记忆。
+- No stable memories yet.
 
-## 不要存储
+## Do Not Store
 
-- 临时会话状态
-- 易漂移的动态坐标
-- 敏感信息
-- 已在 AGENTS.md、技能或其它引导里写过的重复说明
+- Temporary session state
+- Dynamic coordinates that may drift
+- Sensitive information
+- Duplicate instructions already covered in AGENTS.md, skills, or other bootstrap files

@@ -1,12 +1,12 @@
 ---
 name: capcut-theme-video
-description: CapCut (剪映) one-tap video creation on Android. Always clear A_latest first (copy_images_to_album clear-only), then retrieve by time (list_gallery_images) or content (image-memories). Copy to A_latest (clear_album_first), CapCut 照片视频 → A_latest → 全部, multi_tap, N=K.
+description: CapCut one-tap video creation on Android. Always clear A_latest first (copy_images_to_album clear-only), then retrieve by time (list_gallery_images) or content (image-memories). Copy to A_latest (clear_album_first), CapCut Photos Video → A_latest → All, multi_tap, N=K.
 metadata: { "xomniclaw": { "always": false, "emoji": "🎬" } }
 ---
 
-# 剪映（CapCut）一键成片与相册选图
+# CapCut One-Tap Video Creation with Album Selection
 
-本 Skill 指导你如何获取目标照片、统一存入 `A_latest` 相册，并在剪映中完成「一键成片」。
+This Skill guides you on how to obtain target photos, store them uniformly in the `A_latest` album, and complete "one-tap video creation" in CapCut.
 
 ## 何时使用
 

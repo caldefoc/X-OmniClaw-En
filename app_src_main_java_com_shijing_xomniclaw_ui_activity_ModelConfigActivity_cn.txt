@@ -1,0 +1,10 @@
+121:             binding.tvCurrentModel.text = "Agent：未配置"
+122:             binding.tvCurrentSttSummary.text = "STT：未配置（模型未设置）"
+123:             binding.tvCurrentVlmSummary.text = "VLM：未配置（模型未设置）"
+124:             binding.tvSttProviderStatus.text = "未配置（点击配置 STT Key）"
+135:             "STT：未配置"
+146:             return "VLM：跟随 Agent（${agentModelRef ?: "未配置"}）"
+152:             "VLM：未配置"
+439:             .setNegativeButton("取消", null)
+514:             Toast.makeText(this, "✅ 已保存: $modelRef", Toast.LENGTH_SHORT).show()
+523:             Toast.makeText(this, "保存失败: ${e.message}", Toast.LENGTH_LONG).show()

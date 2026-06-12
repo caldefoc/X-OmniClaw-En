@@ -1,0 +1,78 @@
+Analysis Summary
+----------------
+
+The root cause of the remaining Chinese text is straightforward: while strings.xml (English) is properly translated, the vast majority of user-visible strings are hardcoded directly in Kotlin files as string literals, bypassing the Android resource system entirely. The app uses Jetpack Compose, but most composables use raw strings like "设置" instead of stringResource(R.string.settings).
+
+Where Chinese Strings Live (by impact)
+--------------------------------------
+
+Location										Count		What's Affected
+MainActivityCompose.kt							~200+		Chat tab, Status tab, Settings tab - all 3 main screens
+agent/tools/device/DeviceTool.kt				 ~30+		Error messages, CapCut guidance, tool hints
+agent/tools/device/SnapshotFormatter.kt			 ~20		Agent trace output (CapCut workflow)
+agent/loop/AgentLoop.kt							 ~10		Agent trace labels, error messages
+core/MainEntryNew.kt							 ~15		Float window status (step/title)
+config/ProviderRegistry.kt						 ~25		Model names, descriptions, tutorial steps
+ui/session/SessionManager.kt					   7		Session titles, default messages
+ui/viewmodel/ChatViewModel.kt					   7		Memory info, thinking trace
+ui/floatwindow/SessionFloatWindow.kt			  15		Regex patterns matching Chinese backend output
+agent/tools/LlmOnDemandToolInclusion.kt			 ~50		Chinese keyword lists for greeting/tool routing
+gateway/methods/AgentMethods.kt					 ~15		Chinese verbs for intent detection
+Other UI files (4 files)						  ~5		Overlay text, adapter defaults
+
+
+Key Observations
+----------------
+
+- strings.xml is fine - The English resource file is properly translated. Only 3 intentional bilingual entries for language names.
+- The problem is architectural - ~300+ strings are hardcoded in Kotlin rather than using stringResource().
+- Three categories of Chinese strings:
+- - UI display strings (labels, buttons, titles, toasts) - Must be translated
+- - Functional strings (keyword matching for greetings/tool routing) - Must stay bilingual or be extended with English equivalents
+- - Agent trace/output strings (shown in Chat screen) - Must be translated
+
+
+Proposed Plan
+-------------
+
+Phase 1: Extract and translate UI strings in MainActivityCompose.kt
+
+- This single file has ~200+ hardcoded Chinese strings across all 3 tabs
+- Add ~150 new string resources to values/strings.xml
+- Replace all hardcoded strings with stringResource(R.string.xxx) calls
+- This alone will fix ~70% of the visible Chinese on the 3 screens
+
+
+Phase 2: Fix remaining UI files
+
+- SessionManager.kt - session titles and default messages
+- ChatViewModel.kt - memory info strings
+- CameraPreviewOverlay.kt - overlay text
+- VoiceRecordButton.kt - content description
+- ResultRecyclerAdapter.kt - default text
+
+
+Phase 3: Fix Agent trace and error messages
+
+- AgentLoop.kt - trace labels and error messages
+- SnapshotFormatter.kt - CapCut workflow trace
+- DeviceTool.kt - tool error messages and hints
+- MainEntryNew.kt - float window strings
+
+
+Phase 4: Fix model/provider UI
+
+- ProviderRegistry.kt - model names, descriptions, tutorial steps
+
+
+Phase 5: Functional keyword lists (lower priority)
+
+- LlmOnDemandToolInclusion.kt - greeting detection and tool routing keywords
+- AgentMethods.kt - intent detection verbs
+- These need bilingual support (Chinese input matching + English UI)
+
+
+Phase 6: Backend output patterns (careful)
+
+- SessionFloatWindow.kt - regex patterns that match Chinese text from the Agent backend
+- These are coupled to what the agent loop produces; changing them requires also changing the agent output

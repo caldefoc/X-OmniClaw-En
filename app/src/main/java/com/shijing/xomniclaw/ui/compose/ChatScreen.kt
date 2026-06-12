@@ -59,6 +59,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import com.shijing.xomniclaw.R
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -280,12 +282,13 @@ fun ChatScreen(
     cameraPreviewContent: (@Composable () -> Unit)? = null
 ) {
     val isDark = isSystemInDarkTheme()
+    val context = LocalContext.current
     var inputText by remember { mutableStateOf("") }
     // 顶部会话下拉框展开态：用下拉替代左侧固定栏，给主对话更多空间。
     var sessionMenuExpanded by remember { mutableStateOf(false) }
     var pendingDeleteSession by remember { mutableStateOf<SessionManager.Session?>(null) }
     val sortedSessions = remember(sessions) { sessions.sortedByDescending { it.createdAt } }
-    val currentSessionTitle = currentSession?.title?.takeIf { it.isNotBlank() } ?: "选择会话"
+    val currentSessionTitle = currentSession?.title?.takeIf { it.isNotBlank() } ?: stringResource(R.string.chat_select_session)
     // 仅用于主对话展示：隐藏工具调用/工具结果，避免界面被技术细节刷屏。
     val visibleMessages = remember(messages) {
         messages.filterNot { it.kind in HiddenInMainTimelineKinds }
@@ -364,7 +367,7 @@ fun ChatScreen(
                         )
                         Icon(
                             imageVector = Icons.Default.ExpandMore,
-                            contentDescription = "选择会话",
+                            contentDescription = stringResource(R.string.chat_select_session),
                             tint = onSurfaceSecondary()
                         )
                     }
@@ -382,7 +385,7 @@ fun ChatScreen(
                                             overflow = TextOverflow.Ellipsis
                                         )
                                         Text(
-                                            text = formatSessionTime(session.createdAt),
+                                            text = formatSessionTime(session.createdAt, context),
                                             style = TextStyle(
                                                 fontSize = 11.sp,
                                                 color = onSurfaceTertiary()
@@ -400,7 +403,7 @@ fun ChatScreen(
                                         ) {
                                             Icon(
                                                 imageVector = Icons.Filled.Delete,
-                                                contentDescription = "删除会话",
+                                                contentDescription = stringResource(R.string.chat_delete_session),
                                                 tint = Color(0xFFDC2626)
                                             )
                                         }
@@ -419,15 +422,15 @@ fun ChatScreen(
                 FilledTonalButton(onClick = onNewSession) {
                     Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text("新对话", maxLines = 1)
+                    Text(stringResource(R.string.chat_new_conversation), maxLines = 1)
                 }
             }
 
             pendingDeleteSession?.let { session ->
                 AlertDialog(
                     onDismissRequest = { pendingDeleteSession = null },
-                    title = { Text("删除会话") },
-                    text = { Text("确认删除会话「${session.title}」吗？删除后将不可恢复。") },
+                    title = { Text(stringResource(R.string.chat_delete_session_title)) },
+                    text = { Text(stringResource(R.string.chat_delete_confirm, session.title)) },
                     confirmButton = {
                         TextButton(
                             onClick = {
@@ -435,12 +438,12 @@ fun ChatScreen(
                                 pendingDeleteSession = null
                             }
                         ) {
-                            Text("删除", color = Color(0xFFDC2626))
+                            Text(stringResource(R.string.delete), color = Color(0xFFDC2626))
                         }
                     },
                     dismissButton = {
                         TextButton(onClick = { pendingDeleteSession = null }) {
-                            Text("取消")
+                            Text(stringResource(R.string.cancel))
                         }
                     }
                 )
@@ -477,7 +480,7 @@ fun ChatScreen(
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
                         Text(
-                            text = "执行中任务（点击可跳转）",
+                            text = stringResource(R.string.chat_running_tasks),
                             style = TextStyle(
                                 fontSize = 11.sp,
                                 color = Color(0xFF1E40AF),
@@ -504,11 +507,22 @@ fun ChatScreen(
             }
 
             if (permissionStatusInfo.isNotBlank()) {
-                // 主对话页实时权限状态条：放在会话记忆信息下方，方便随时观察。
+                // Real-time permission status bar on the chat screen: click to open permissions page.
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 12.dp, vertical = 2.dp),
+                        .padding(horizontal = 12.dp, vertical = 2.dp)
+                        .clickable {
+                            try {
+                                val intent = android.content.Intent().apply {
+                                    component = android.content.ComponentName(
+                                        context.packageName,
+                                        "com.shijing.xomniclaw.accessibility.PermissionActivity"
+                                    )
+                                }
+                                context.startActivity(intent)
+                            } catch (_: Exception) {}
+                        },
                     shape = RoundedCornerShape(8.dp),
                     color = if (permissionStatusHealthy) {
                         if (isDark) Color(0xFF1A3A2E) else Color(0xFFECFDF5)
@@ -570,7 +584,7 @@ fun ChatScreen(
                         Text(text = "👋", style = TextStyle(fontSize = 48.sp))
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "开始聊天",
+                            text = stringResource(R.string.chat_start_chat),
                             style = TextStyle(
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
@@ -579,7 +593,7 @@ fun ChatScreen(
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "向 AI 助手发送消息来控制手机",
+                            text = stringResource(R.string.chat_send_to_agent),
                             style = TextStyle(fontSize = 14.sp, color = onSurfaceSecondary())
                         )
                     }
@@ -671,7 +685,7 @@ private fun CollapsedChatSidebarRail(
             IconButton(onClick = onExpand) {
                 Icon(
                     imageVector = Icons.Filled.KeyboardArrowRight,
-                    contentDescription = "展开会话列表",
+                    contentDescription = stringResource(R.string.chat_expand_session_list),
                     tint = ChatPurple
                 )
             }
@@ -690,6 +704,7 @@ private fun ChatSessionSidebar(
     modifier: Modifier = Modifier
 ) {
     val isDark = isSystemInDarkTheme()
+    val context = LocalContext.current
     Surface(
         modifier = modifier,
         color = chatSidebarBg(),
@@ -711,7 +726,7 @@ private fun ChatSessionSidebar(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowLeft,
-                        contentDescription = "收起会话列表",
+                        contentDescription = stringResource(R.string.chat_collapse_session_list),
                         tint = onSurfaceSecondary()
                     )
                 }
@@ -728,7 +743,7 @@ private fun ChatSessionSidebar(
                 )
                 if (onCheckUpdate != null) {
                     TextButton(onClick = onCheckUpdate) {
-                        Text("更新", fontSize = 12.sp, color = ChatPurple)
+                        Text(stringResource(R.string.chat_update), fontSize = 12.sp, color = ChatPurple)
                     }
                 }
             }
@@ -741,11 +756,11 @@ private fun ChatSessionSidebar(
             ) {
                 Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("新对话")
+                Text(stringResource(R.string.chat_new_conversation))
             }
             Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "历史会话",
+                text = stringResource(R.string.chat_history_sessions),
                 style = TextStyle(fontSize = 12.sp, color = onSurfaceSecondary())
             )
             Spacer(modifier = Modifier.height(6.dp))
@@ -779,7 +794,7 @@ private fun ChatSessionSidebar(
                                     )
                                 )
                                 Text(
-                                    text = formatSessionTime(session.createdAt),
+                                    text = formatSessionTime(session.createdAt, context),
                                     style = TextStyle(fontSize = 11.sp, color = onSurfaceTertiary())
                                 )
                             }
@@ -803,7 +818,8 @@ private fun ExpandableToolTimelineItem(
     var expanded by remember(message.id) { mutableStateOf(false) }
     val isDark = isSystemInDarkTheme()
     val (_, textColor) = messageColors(message)
-    val label = messageTimelineLabel(message.kind) ?: "步骤"
+    val labelRes = messageTimelineLabelRes(message.kind)
+    val label = if (labelRes != null) stringResource(labelRes) else stringResource(R.string.chat_step)
     val cleaned = remember(message.content) { ChatMediaParser.extract(message.content).cleanedText }
     val oneLine = cleaned.lines().firstOrNull()?.take(120) ?: ""
 
@@ -888,7 +904,8 @@ fun MessageItem(
 
     val alignment = if (message.isUser) Alignment.End else Alignment.Start
     val (backgroundColor, textColor) = messageColors(message)
-    val timelineLabel = messageTimelineLabel(message.kind)
+    val timelineLabelRes = messageTimelineLabelRes(message.kind)
+    val timelineLabel = if (timelineLabelRes != null) stringResource(timelineLabelRes) else null
 
     Row(
         modifier = modifier
@@ -989,7 +1006,7 @@ fun MessageItem(
                     if (isLong) {
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = if (expanded) "收起 ▲" else "展开 ▼",
+                            text = if (expanded) stringResource(R.string.chat_collapse) else stringResource(R.string.chat_expand),
                             style = TextStyle(
                                 color = if (message.isUser) Color(0xFF6B21A8).copy(alpha = 0.85f)
                                 else ChatPurple,
@@ -1008,7 +1025,7 @@ fun MessageItem(
                         }
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
-                            text = "✅ 已复制",
+                            text = stringResource(R.string.chat_copied),
                             style = TextStyle(
                                 color = textColor.copy(alpha = 0.6f),
                                 fontSize = 11.sp
@@ -1081,16 +1098,16 @@ private fun messageColors(message: ChatMessage): Pair<Color, Color> {
     }
 }
 
-private fun messageTimelineLabel(kind: ChatMessageKind): String? {
+private fun messageTimelineLabelRes(kind: ChatMessageKind): Int? {
     return when (kind) {
         ChatMessageKind.USER -> null
         ChatMessageKind.ASSISTANT -> null
-        ChatMessageKind.THINKING -> "思考过程"
-        ChatMessageKind.BLOCK_REPLY -> "中间回复"
-        ChatMessageKind.TOOL_CALL -> "工具调用"
-        ChatMessageKind.TOOL_RESULT -> "工具结果"
-        ChatMessageKind.ERROR -> "执行错误"
-        ChatMessageKind.SYSTEM -> "系统消息"
+        ChatMessageKind.THINKING -> R.string.chat_thinking_process
+        ChatMessageKind.BLOCK_REPLY -> R.string.chat_intermediate_reply
+        ChatMessageKind.TOOL_CALL -> R.string.chat_tool_call
+        ChatMessageKind.TOOL_RESULT -> R.string.chat_tool_result
+        ChatMessageKind.ERROR -> R.string.chat_execution_error
+        ChatMessageKind.SYSTEM -> R.string.chat_system_message
     }
 }
 
@@ -1131,7 +1148,7 @@ private fun ChatImageThumbnail(
         if (bitmap != null) {
             Image(
                 bitmap = bitmap.asImageBitmap(),
-                contentDescription = "聊天图片预览",
+                contentDescription = stringResource(R.string.chat_image_preview),
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 120.dp, max = 220.dp),
@@ -1139,7 +1156,7 @@ private fun ChatImageThumbnail(
             )
         } else {
             Text(
-                text = "图片不存在或无法读取\n${media.normalizedPath}",
+                text = stringResource(R.string.chat_image_not_found) + "\n" + media.normalizedPath,
                 style = TextStyle(fontSize = 13.sp, color = if (isDark) Color(0xFF888888) else Color(0xFF666666)),
                 modifier = Modifier.padding(12.dp)
             )
@@ -1153,6 +1170,7 @@ private fun ChatVideoCard(
     onClick: () -> Unit
 ) {
     val isDark = isSystemInDarkTheme()
+    val context = LocalContext.current
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -1162,7 +1180,7 @@ private fun ChatVideoCard(
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
-                text = "视频预览",
+                text = stringResource(R.string.chat_video_preview),
                 style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold, color = if (isDark) Color(0xFFE0E0E0) else Color(0xFF1A1A1A))
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -1172,7 +1190,7 @@ private fun ChatVideoCard(
             )
             Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                text = "点击播放",
+                text = stringResource(R.string.chat_click_to_play),
                 style = TextStyle(fontSize = 13.sp, color = ChatPurple, fontWeight = FontWeight.Medium)
             )
         }
@@ -1198,7 +1216,7 @@ private fun ChatMediaPreviewDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("关闭")
+                Text(stringResource(R.string.chat_close))
             }
         },
         text = {
@@ -1207,12 +1225,12 @@ private fun ChatMediaPreviewDialog(
                     if (bitmap != null) {
                         Image(
                             bitmap = bitmap.asImageBitmap(),
-                            contentDescription = "大图预览",
+                            contentDescription = stringResource(R.string.chat_fullscreen_preview),
                             modifier = Modifier.fillMaxWidth(),
                             contentScale = ContentScale.Fit
                         )
                     } else {
-                        Text("图片不存在或无法读取：${media.normalizedPath}")
+                        Text(stringResource(R.string.chat_image_not_found) + ": " + media.normalizedPath)
                     }
                 }
                 ChatMediaType.VIDEO -> {
@@ -1236,13 +1254,13 @@ private fun ChatMediaPreviewDialog(
                                 .height(240.dp)
                         )
                     } else {
-                        Text("视频不存在或无法读取：${media.normalizedPath}")
+                        Text(stringResource(R.string.chat_video_not_found) + ": " + media.normalizedPath)
                     }
                 }
             }
         },
         title = {
-            Text(if (media.type == ChatMediaType.IMAGE) "图片预览" else "视频播放")
+            Text(if (media.type == ChatMediaType.IMAGE) stringResource(R.string.chat_image_preview) else stringResource(R.string.chat_video_preview))
         }
     )
 }
@@ -1423,7 +1441,7 @@ private fun AnnotatedString.Builder.appendInlineMarkdown(text: String, textColor
 private fun copyToClipboard(context: Context, text: String) {
     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     clipboard.setPrimaryClip(ClipData.newPlainText("message", text))
-    Toast.makeText(context, "已复制", Toast.LENGTH_SHORT).show()
+    Toast.makeText(context, context.getString(R.string.chat_copied), Toast.LENGTH_SHORT).show()
 }
 
 @Composable
@@ -1532,7 +1550,7 @@ fun MessageComposer(
                     ) {
                         Icon(
                             imageVector = if (isVoiceMode) Icons.Default.Keyboard else Icons.Default.Mic,
-                            contentDescription = if (isVoiceMode) "切换键盘输入" else "切换语音输入",
+                            contentDescription = if (isVoiceMode) stringResource(R.string.chat_switch_to_keyboard) else stringResource(R.string.chat_switch_to_voice),
                             tint = if (isDark) Color(0xFFBDBDBD) else Color(0xFF666666),
                             modifier = Modifier.size(20.dp)
                         )
@@ -1582,11 +1600,13 @@ fun MessageComposer(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = when {
-                                isVoiceListening -> "松开结束识别"
-                                isVoiceProcessing -> "正在识别并等待回答..."
-                                else -> "按住说话"
-                            },
+                            text = stringResource(
+                            when {
+                                isVoiceListening -> R.string.chat_release_to_stop
+                                isVoiceProcessing -> R.string.chat_recognizing_waiting
+                                else -> R.string.chat_hold_to_talk
+                            }
+                        ),
                             style = TextStyle(
                                 fontSize = 15.sp,
                                 color = when {
@@ -1625,7 +1645,7 @@ fun MessageComposer(
                             ) {
                                 if (value.isEmpty()) {
                                     Text(
-                                        text = "发送消息",
+                                        text = stringResource(R.string.chat_send_message),
                                         style = TextStyle(fontSize = 15.sp, color = if (isDark) Color(0xFF777777) else Color(0xFF999999))
                                     )
                                 }
@@ -1651,7 +1671,7 @@ fun MessageComposer(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Default.Stop,
-                            contentDescription = "停止",
+                            contentDescription = stringResource(R.string.chat_stop),
                             tint = Color.White,
                             modifier = Modifier.size(22.dp)
                         )
@@ -1669,7 +1689,7 @@ fun MessageComposer(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Default.Send,
-                            contentDescription = "发送",
+                            contentDescription = stringResource(R.string.chat_send),
                             tint = Color.White,
                             modifier = Modifier.size(20.dp)
                         )
@@ -1687,7 +1707,7 @@ fun MessageComposer(
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "更多功能",
+                            contentDescription = stringResource(R.string.chat_more_functions),
                             tint = if (isDark) Color(0xFFBDBDBD) else Color(0xFF666666),
                             modifier = Modifier.size(20.dp)
                         )
@@ -1703,13 +1723,13 @@ private fun formatTimestamp(timestamp: Long): String {
     return sdf.format(Date(timestamp))
 }
 
-private fun formatSessionTime(timestamp: Long): String {
+private fun formatSessionTime(timestamp: Long, context: Context): String {
     val now = System.currentTimeMillis()
     val diff = now - timestamp
     return when {
-        diff < 60_000 -> "刚刚"
-        diff < 3600_000 -> "${diff / 60_000} 分钟前"
-        diff < 86400_000 -> "${diff / 3600_000} 小时前"
+        diff < 60_000 -> context.getString(R.string.time_just_now)
+        diff < 3600_000 -> context.getString(R.string.time_minutes_ago, diff / 60_000)
+        diff < 86400_000 -> context.getString(R.string.time_hours_ago, diff / 3600_000)
         else -> {
             val sdf = SimpleDateFormat("MM-dd HH:mm", Locale.getDefault())
             sdf.format(Date(timestamp))
@@ -1761,7 +1781,7 @@ private fun AgentRoundTraceCard(
                     color = if (isDark) Color(0xFF2A2A4E) else Color(0xFFEEF2FF)
                 ) {
                     Text(
-                        text = "第 ${roundIndex.coerceAtLeast(1)} 轮",
+                        text = stringResource(R.string.chat_round_label, roundIndex.coerceAtLeast(1)),
                         style = TextStyle(
                             fontSize = 11.sp,
                             color = if (isDark) Color(0xFF90CAF9) else Color(0xFF4338CA),
@@ -1772,7 +1792,7 @@ private fun AgentRoundTraceCard(
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Agent 执行轨迹 · ${steps.size} steps",
+                    text = stringResource(R.string.chat_agent_trace, steps.size),
                     modifier = Modifier.weight(1f),
                     style = TextStyle(
                         fontSize = 13.sp,
@@ -1783,7 +1803,7 @@ private fun AgentRoundTraceCard(
                 IconButton(onClick = onToggleExpanded, modifier = Modifier.size(24.dp)) {
                     Icon(
                         imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                        contentDescription = if (expanded) "收起执行轨迹" else "展开执行轨迹",
+                        contentDescription = if (expanded) stringResource(R.string.chat_collapse_trace) else stringResource(R.string.chat_expand_trace),
                         tint = if (isDark) Color(0xFF888888) else Color(0xFF94A3B8),
                         modifier = Modifier.size(18.dp)
                     )
@@ -1793,7 +1813,7 @@ private fun AgentRoundTraceCard(
             if (!expanded) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "最近一步：${summary.ifBlank { "暂无摘要" }}",
+                    text = stringResource(R.string.chat_latest_step, summary.ifBlank { stringResource(R.string.chat_no_summary) }),
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = if (isDark) Color(0xFFAAAAAA) else Color(0xFF64748B)
@@ -1823,7 +1843,8 @@ private fun AgentTraceStepRow(
 ) {
     val isDark = isSystemInDarkTheme()
     val (_, textColor) = messageColors(message)
-    val title = messageTimelineLabel(message.kind) ?: "步骤"
+    val titleRes = messageTimelineLabelRes(message.kind)
+    val title = if (titleRes != null) stringResource(titleRes) else stringResource(R.string.chat_step)
     val cleanedContent = remember(message.content) {
         stripInlineStepPrefix(message.content)
     }

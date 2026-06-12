@@ -1,5 +1,6 @@
 package com.shijing.xomniclaw.ui.activity
 
+import android.content.Context
 import com.shijing.xomniclaw.scheduler.ScheduledTask
 import java.util.Locale
 
@@ -8,10 +9,10 @@ import java.util.Locale
  */
 fun formatTaskSortOptionLabel(option: ScheduledTaskSortOption): String {
     return when (option) {
-        ScheduledTaskSortOption.NEXT_TRIGGER_ASC -> "按下次触发时间"
-        ScheduledTaskSortOption.LAST_TRIGGER_DESC -> "按最近触发时间"
-        ScheduledTaskSortOption.UPDATED_DESC -> "按最近更新时间"
-        ScheduledTaskSortOption.NAME_ASC -> "按任务名称"
+        ScheduledTaskSortOption.NEXT_TRIGGER_ASC -> "By next trigger time"
+        ScheduledTaskSortOption.LAST_TRIGGER_DESC -> "By last trigger time"
+        ScheduledTaskSortOption.UPDATED_DESC -> "By last updated"
+        ScheduledTaskSortOption.NAME_ASC -> "By task name"
     }
 }
 
@@ -23,7 +24,8 @@ fun formatTaskSortOptionLabel(option: ScheduledTaskSortOption): String {
 fun filterAndSortScheduledTasks(
     tasks: List<ScheduledTask>,
     searchQuery: String,
-    sortOption: ScheduledTaskSortOption
+    sortOption: ScheduledTaskSortOption,
+    context: Context
 ): List<ScheduledTask> {
     val normalizedQuery = searchQuery.trim().lowercase(Locale.getDefault())
     val filtered = if (normalizedQuery.isBlank()) {
@@ -34,7 +36,7 @@ fun filterAndSortScheduledTasks(
                 task.name,
                 task.instruction,
                 task.repeat,
-                formatRepeatLabel(task.repeat)
+                formatRepeatLabel(context, task.repeat)
             ).joinToString(" ").lowercase(Locale.getDefault())
             searchTarget.contains(normalizedQuery)
         }

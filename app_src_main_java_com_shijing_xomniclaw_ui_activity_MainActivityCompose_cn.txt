@@ -1,0 +1,238 @@
+289:             Log.i(TAG, "🔧 首次启动，打开模型配置引导...")
+345:                         append("发现新版本 v${info.latestVersion}\n")
+346:                         append("当前版本 v${info.currentVersion}\n")
+347:                         if (sizeStr.isNotEmpty()) append("大小: $sizeStr\n")
+354:                         .setTitle("发现新版本")
+356:                         .setPositiveButton("立即更新") { _, _ ->
+369:                         .setNegativeButton("稍后再说", null)
+498:             Toast.makeText(context, "相册权限已授权", Toast.LENGTH_SHORT).show()
+500:             Toast.makeText(context, "相册权限未完全授权，请在权限页手动开启", Toast.LENGTH_LONG).show()
+642:             android.widget.Toast.makeText(context, "语音识别: $it", android.widget.Toast.LENGTH_SHORT).show()
+769:     var permissionStatusInfo by remember { mutableStateOf("权限状态：检查中...") }
+771:     var currentModelInfo by remember { mutableStateOf("当前模型：读取中...") }
+782:                 "无障碍" to snapshot.accessibility,
+783:                 "悬浮窗" to snapshot.overlay,
+784:                 "录屏" to snapshot.screenCapture,
+785:                 "相册" to snapshot.album,
+786:                 "全部文件" to snapshot.allFilesAccess,
+787:                 "摄像头" to snapshot.camera,
+788:                 "麦克风" to snapshot.microphone
+795:                 "权限状态：全部已授权（$grantedCount/7）"
+797:                 "权限状态：未全部授权（$grantedCount/7）｜缺失：${missing.joinToString("、")}"
+801:             permissionStatusInfo = "权限状态：检查失败"
+812:                 currentModelInfo = "当前模型：未配置"
+827:             val sttDisplay = if (sttModelId.isBlank()) "未配置" else "stt/$sttModelId"
+828:             val vlmDisplay = if (vlmModelId.isBlank()) "跟随 Agent" else "vlm/$vlmModelId"
+829:             currentModelInfo = "当前模型：Agent $agentDisplay｜STT $sttDisplay｜VLM $vlmDisplay"
+831:             currentModelInfo = "当前模型：读取失败"
+911:                 val message = if (entered) "已进入屏内替身模式" else "进入替身模式失败"
+914:                 Toast.makeText(context, "应用上下文异常，无法进入替身模式", Toast.LENGTH_SHORT).show()
+917:             Toast.makeText(context, "需要录屏权限以采集屏幕画面", Toast.LENGTH_SHORT).show()
+934:             Toast.makeText(context, "需要摄像头权限", Toast.LENGTH_SHORT).show()
+971:             android.widget.Toast.makeText(context, "需要录音权限", android.widget.Toast.LENGTH_SHORT).show()
+1007:             title = { Text("选择视觉输入") },
+1012:                     }) { Text("摄像头") }
+1027:                                 val message = if (entered) "已进入屏内替身模式" else "进入替身模式失败"
+1030:                                 Toast.makeText(context, "应用上下文异常，无法进入替身模式", Toast.LENGTH_SHORT).show()
+1040:                     }) { Text("屏幕画面（截屏流）") }
+1046:                             Toast.makeText(context, "应用上下文异常，无法开始轨迹录制", Toast.LENGTH_SHORT).show()
+1048:                             Toast.makeText(context, "需要先启用无障碍服务", Toast.LENGTH_SHORT).show()
+1051:                             val message = if (started) "已开始轨迹录制" else "开始轨迹录制失败"
+1054:                     }) { Text("轨迹录制（支持 Deeplink 收藏）") }
+1058:                 TextButton(onClick = { showVisionSourcePicker = false }) { Text("取消") }
+1094:                 android.widget.Toast.makeText(it, "正在检查更新...", android.widget.Toast.LENGTH_SHORT).show()
+1102:                             android.widget.Toast.makeText(it, "已是最新版本 v${info.currentVersion}", android.widget.Toast.LENGTH_SHORT).show()
+1105:                         android.widget.Toast.makeText(it, "检查更新失败", android.widget.Toast.LENGTH_SHORT).show()
+1166:                 automationTaskSummary = "未启用"
+1188:                     lastMessage = "尚未运行"
+1252:             loadErrorMessage.value = "读取定时任务失败：${e.message}"
+1267:                         "已启用，每隔 ${it.intervalMinutes ?: settings.scanIntervalMinutes} 分钟扫描一次"
+1268:                     } ?: "已启用，等待后台自动任务创建"
+1270:                     "未启用"
+1277:                 loadErrorMessage.value = "读取相册记忆设置失败：${e.message}"
+1312:                 loadErrorMessage.value = "读取 Memory 失败：${e.message}"
+1324:                 content = if (content.isNotBlank()) content else "暂无内容"
+1327:             Toast.makeText(context, "读取 Memory 内容失败：${e.message}", Toast.LENGTH_SHORT).show()
+1357:                     "已启用，每隔 ${updated.scanIntervalMinutes} 分钟扫描一次"
+1359:                     "未启用"
+1364:             Toast.makeText(context, "保存相册记忆设置失败：${e.message}", Toast.LENGTH_SHORT).show()
+1379:                 "后台扫描已启动：本次最多补扫 ${settings.manualSyncMaxImages} 张未写入图片，切到后台后也会继续执行。"
+1382:             manualGallerySyncMessage.value = "启动后台扫描失败：${e.message}"
+1393:             manualGallerySyncMessage.value = "已重置相册扫描游标，下次同步会从更早的位置重新补扫未写入图片。"
+1396:             manualGallerySyncMessage.value = "重置扫描游标失败：${e.message}"
+1410:             memoryMaintenanceMessage.value = "已初始化 $fileName：当前内容已恢复为初始模板。"
+1413:             memoryMaintenanceMessage.value = "初始化 $fileName 失败：${e.message}"
+1509:                         Toast.makeText(context, "定时任务已更新", Toast.LENGTH_SHORT).show()
+1514:                         editErrorMessage.value = result.errorMessage ?: "保存失败"
+1528:             title = { Text("删除定时任务") },
+1529:             text = { Text("确认删除任务“${task.name}”？删除后不会自动恢复。") },
+1542:                                 Toast.makeText(context, "定时任务已删除", Toast.LENGTH_SHORT).show()
+1545:                                 Toast.makeText(context, "删除失败，任务可能已不存在", Toast.LENGTH_SHORT).show()
+1550:                     Text(if (taskActionInProgressId.value == task.id) "删除中..." else "删除")
+1558:                     Text("取消")
+1587:                     Text("关闭")
+1606:             text = "AI 移动自动化平台",
+1640:                     text = if (gatewayRunning.value) "运行中 (ws://0.0.0.0:8765)" else "未运行",
+1660:                     text = if (skillsCount.value > 0) "${skillsCount.value} 个 Skills" else "加载中...",
+1695:                             if (enabled) "定时任务已启用" else "定时任务已停用",
+1702:                             result.errorMessage ?: "更新任务状态失败",
+1756:                 title = { Text("开启相册记忆与画像") },
+1759:                         "已开始准备扫描相册内容，用于构建图片记忆与用户画像。\n" +
+1760:                             "请在系统里授权照片/媒体权限。\n" +
+1761:                             "可随时关闭总开关暂停。"
+1766:                         Text("我知道了")
+1849:                 text = "Token 使用量（实时）",
+1853:                 text = "本会话累计：${formatTokenUsageLine(status.sessionCounter)}",
+1857:                 text = "全局累计：${formatTokenUsageLine(status.globalCounter)}",
+1869:     return "输入 ${counter.promptTokens} / 输出 ${counter.completionTokens} / 合计 ${counter.totalTokens}"
+1900:                         text = "定时任务",
+1904:                         text = "当前共 ${allTasksCount} 个任务，当前显示 ${tasks.size} 个",
+1910:                     Text("刷新")
+1917:                 label = { Text("搜索任务") },
+1918:                 supportingText = { Text("支持按任务名、执行指令、重复类型搜索") },
+1924:                 label = "排序方式",
+1934:                     text = "暂无定时任务",
+1940:                     text = "没有匹配当前搜索条件的定时任务",
+1984:                     text = if (task.enabled) "已启用" else "已停用",
+1990:                 Text("编辑")
+1995:             text = "类型：${formatRepeatLabel(task.repeat)}",
+1999:             text = "下一次触发：${formatTaskScheduleSummary(task)}",
+2003:             text = "执行指令：${task.instruction}",
+2017:                 Text(if (task.enabled) "停用" else "启用")
+2023:                 Text("删除")
+2035:             text = "最近触发：${task.lastTriggeredAtMs?.let { formatTimestamp(it) } ?: "暂无"}",
+2039:             text = "触发延迟：${task.lastTriggerDelayMs?.let { "${it}ms" } ?: "暂无"}",
+2043:             text = "派发耗时：${task.lastDispatchLatencyMs?.let { "${it}ms" } ?: "暂无"}",
+2047:             text = "触发来源：${task.lastTriggerSource ?: "暂无"}",
+2052:                 text = "亮屏结果：$wakeSummary",
+2084:                 text = "相册记忆与画像",
+2088:                 text = "管理后台增量扫描、画像默认加载和自动同步频率",
+2098:                         text = "后台扫描进度",
+2132:                     Text("总开关")
+2134:                         text = "启用后默认允许后台定时增量扫描相册",
+2151:                     Text("画像加载")
+2153:                         text = "执行任务时默认加载 USER-PROFILE.md",
+2165:                 text = "扫描频率",
+2169:                 text = "选择后台增量扫描相册的频率，开启总开关后生效",
+2174:                 label = "扫描频率",
+2188:                     Text("快速测试")
+2190:                         text = "立即执行一次：后台最多补扫 ${state.manualSyncMaxImages} 张未写入图片，并更新画像",
+2199:                     Text(if (manualSyncInProgress) "扫描中..." else "立即扫描一次")
+2203:                 label = "快速测试最多扫描",
+2217:                     Text("游标维护")
+2219:                         text = "如果怀疑有遗漏，可重置扫描位置后重新补扫；已写入的图片会被 stableKey 过滤，不会重复写入。",
+2228:                     Text("重置游标")
+2241:                 text = "当前状态：${state.automationTaskSummary}。仅扫描新增图片；若没有新增图片，则不会生成新的记忆内容。",
+2283:                         text = "可查看 MEMORY.md、IMAGE-MEMORY.md、USER-PROFILE.md 与按日沉淀日志",
+2289:                     Text("刷新")
+2295:                     "MEMORY.md 已存在，长度 ${snapshot.longTermMemoryLength} 字符"
+2297:                     "MEMORY.md 暂无内容"
+2299:                 viewButtonText = "查看 MEMORY.md",
+2307:                 text = "全局记忆进化：待处理 ${snapshot.evolutionStatus.pendingEvents} 条，最近处理 ${snapshot.evolutionStatus.processedEvents} 条，采纳 ${snapshot.evolutionStatus.acceptedCandidates} 条",
+2312:                 text = "最近结果：${snapshot.evolutionStatus.lastMessage}",
+2319:                     "IMAGE-MEMORY.md 已存在，长度 ${snapshot.imageMemoriesLength} 字符"
+2321:                     "IMAGE-MEMORY.md 暂无内容"
+2323:                 viewButtonText = "查看 IMAGE-MEMORY.md",
+2332:                     "USER-PROFILE.md 已存在，长度 ${snapshot.userProfileLength} 字符"
+2334:                     "USER-PROFILE.md 暂无内容"
+2336:                 viewButtonText = "查看 USER-PROFILE.md",
+2352:                 text = "知识类文件：${snapshot.knowledgeFiles.size} 个",
+2357:                     text = "暂无额外 memory 文件",
+2378:                             Text("查看")
+2387:                 text = "每日日志：${snapshot.dailyLogs.size} 个",
+2392:                     text = "暂无 daily log",
+2413:                             Text("查看")
+2447:                 Text(if (memoryDetailLoading) "读取中..." else viewButtonText)
+2453:                 Text(if (maintenanceInProgress) "处理中..." else "初始化")
+2479:             Text("编辑定时任务")
+2491:                     label = { Text("任务名称") },
+2498:                     label = { Text("执行指令") },
+2505:                     label = "重复类型",
+2518:                             label = { Text("执行时间") },
+2519:                             supportingText = { Text("格式：yyyy-MM-dd HH:mm 或 yyyy-MM-dd HH:mm:ss") },
+2530:                             label = { Text("每日时间") },
+2531:                             supportingText = { Text("格式：HH:mm，例如 21:30") },
+2541:                             label = { Text("每周时间") },
+2542:                             supportingText = { Text("格式：HH:mm，例如 09:00") },
+2549:                             label = { Text("周几") },
+2550:                             supportingText = { Text("支持：周三 / 1,3,5 / mon,wed,fri") },
+2560:                             label = { Text("间隔分钟数") },
+2561:                             supportingText = { Text("例如：30 表示每隔 30 分钟") },
+2571:                     label = { Text("时区（可选）") },
+2572:                     supportingText = { Text("留空则使用系统时区，例如 Asia/Shanghai") },
+2582:                     Text("启用任务")
+2595:                     Text("精确闹钟")
+2608:                     Text("允许息屏空闲时触发")
+2630:                 Text(if (isSaving) "保存中..." else "保存")
+2638:                 Text("取消")
+2697:         return "已停用"
+2701:         ScheduledTask.REPEAT_ONCE -> task.runAtMs?.let { formatTimestamp(it) } ?: "未配置"
+2702:         ScheduledTask.REPEAT_DAILY -> "${task.dailyTime ?: "--:--"}，下次 ${task.nextTriggerAtMs?.let { formatTimestamp(it) } ?: "未知"}"
+2705:             "周[$days] ${task.dailyTime ?: "--:--"}，下次 ${task.nextTriggerAtMs?.let { formatTimestamp(it) } ?: "未知"}"
+2707:         ScheduledTask.REPEAT_WORKDAY -> "${task.dailyTime ?: "--:--"}，下次 ${task.nextTriggerAtMs?.let { formatTimestamp(it) } ?: "未知"}"
+2708:         ScheduledTask.REPEAT_INTERVAL -> "每隔 ${task.intervalMinutes ?: 0} 分钟，下次 ${task.nextTriggerAtMs?.let { formatTimestamp(it) } ?: "未知"}"
+2709:         else -> task.nextTriggerAtMs?.let { formatTimestamp(it) } ?: "未知"
+2715:         ScheduledTask.REPEAT_ONCE -> "一次性"
+2716:         ScheduledTask.REPEAT_DAILY -> "每天"
+2717:         ScheduledTask.REPEAT_WEEKLY -> "每周"
+2718:         ScheduledTask.REPEAT_WORKDAY -> "工作日"
+2719:         ScheduledTask.REPEAT_INTERVAL -> "固定间隔"
+2734:         minutes % (24 * 60) == 0 -> "每 ${minutes / (24 * 60)} 天"
+2735:         minutes % 60 == 0 -> "每 ${minutes / 60} 小时"
+2736:         else -> "每 $minutes 分钟"
+2741:     return "最多 $maxImages 张"
+2746:         "preparing" -> "准备中"
+2747:         "scanning" -> "扫描中"
+2748:         "summarizing" -> "生成记忆中"
+2749:         "writing" -> "写入中"
+2750:         "completed" -> "已完成"
+2751:         "failed" -> "失败"
+2752:         else -> "待命中"
+2953:                 text = "权限状态（实时）",
+2958:                     "全部已授权（$grantedCount/7）"
+2960:                     "未全部授权（$grantedCount/7）"
+2973:                     text = "$label：${if (granted) "已授权" else "未授权"}",
+2984:             statusLine("无障碍服务", accessibility)
+2985:             statusLine("悬浮窗", overlay)
+2986:             statusLine("录屏权限", screenCapture)
+2987:             statusLine("相册读取", albumPermission)
+2988:             statusLine("文件管理(全部文件)", allFilesAccess)
+2989:             statusLine("摄像头", cameraPermission)
+2990:             statusLine("麦克风", microphonePermission)
+2993:                 text = "点击此卡片可进入权限页面",
+3038:             text = "设置",
+3050:                 android.util.Log.d("SettingsTab", "卡片被点击了")
+3061:                     contentDescription = "配置"
+3066:                         text = "模型配置",
+3070:                         text = "配置 API Key 和模型参数",
+3102:                         text = "配置多渠道接入（飞书等）",
+3118:                         xomniclawJsonSnapshot.value == null -> "xomniclaw.json 读取中…"
+3120:                             "xomniclaw.json 已存在，长度 ${xomniclawJsonSnapshot.value!!.second} 字符"
+3121:                         else -> "xomniclaw.json 暂无内容（文件尚未生成）"
+3139:                                         exists -> "暂无内容"
+3141:                                             "文件不存在：$xomniclawJsonPath\n\n可在「模型配置」保存后自动生成。"
+3145:                                 Toast.makeText(context, "读取失败：${e.message}", Toast.LENGTH_SHORT).show()
+3153:                     Text(if (xomniclawJsonLoading.value) "读取中..." else "查看 xomniclaw.json")
+3201:                     Text("关闭")
+3230:                     contentDescription = "版本信息"
+3234:                         text = "版本信息",
+3238:                         text = "显示当前应用版本与构建类型；可从 GitHub Releases 检查新版本。",
+3246:                 text = "应用版本：${BuildConfig.VERSION_NAME}（versionCode ${BuildConfig.VERSION_CODE}）",
+3250:                 text = "构建类型：${BuildConfig.BUILD_VARIANT}",
+3264:                             Toast.makeText(context, "当前页面无法执行检查更新", Toast.LENGTH_SHORT).show()
+3267:                         Toast.makeText(activity, "正在检查更新...", Toast.LENGTH_SHORT).show()
+3277:                                         "已是最新版本 v${info.currentVersion}",
+3282:                                 Toast.makeText(activity, "检查更新失败", Toast.LENGTH_SHORT).show()
+3290:                         contentDescription = "检查更新",
+3295:                         text = "检查更新",
+3327:                         text = "Snapshot 附加 YOLO 结果",
+3331:                         text = "关闭时仅返回无障碍 snapshot；开启后会并行执行 YOLO，并追加原始检测结果给大模型参考。",
+3350:                 title = "YOLO 置信度阈值",
+3351:                 description = "分数低于该值的检测框会被过滤。",
+3362:                 title = "YOLO IoU 阈值",
+3363:                 description = "NMS 去重时使用，越大越容易保留重叠检测框。",
+3441:                     text = "将发送给大模型的完整请求落盘到 /sdcard/.xomniclaw/workspace/logs/prompt-dumps/（默认关闭）",
+3477:                     text = "Logcat 完整 LLM 请求",
+3481:                     text = "将实际上传 wire JSON 分段打 logcat（标签 LLMFullRequest），并写入 " +
+3482:                         "/sdcard/.xomniclaw/workspace/logs/llm-full-request/*.json（与 HTTP 正文一致，另附 .meta.txt）。\n" +
+3483:                         "长 base64 时 logcat 可能丢行，请用 adb pull 或看带 path= 的短行。默认关闭。",

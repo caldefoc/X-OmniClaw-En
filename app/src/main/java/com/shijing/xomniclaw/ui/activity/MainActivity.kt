@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                 if (isGatewayRunning()) {
                     showGatewayInfo()
                 } else {
-                    Toast.makeText(this@MainActivity, "Gateway 未运行", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.main_gateway_not_running), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateGatewayCard() {
         val isRunning = isGatewayRunning()
         binding.apply {
-            tvGatewayStatus.text = if (isRunning) "运行中" else "未运行"
+            tvGatewayStatus.text = if (isRunning) getString(R.string.main_gateway_running) else getString(R.string.main_gateway_stopped)
             tvGatewayStatus.setTextColor(
                 if (isRunning) getColor(R.color.status_ok)
                 else getColor(R.color.status_error)
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity() {
                 tvGatewayDetails.text = "WebSocket: ws://0.0.0.0:8765\n" +
                         "Sessions: ${getSessionCount()}"
             } else {
-                tvGatewayDetails.text = "Gateway 服务未启动"
+                tvGatewayDetails.text = getString(R.string.main_gateway_not_started)
             }
         }
     }
@@ -184,16 +184,16 @@ class MainActivity : AppCompatActivity() {
         val allGranted = accessibility && overlay && screenCapture
 
         binding.apply {
-            tvPermissionsStatus.text = if (allGranted) "已授权" else "需要授权"
+            tvPermissionsStatus.text = if (allGranted) getString(R.string.main_permissions_authorized) else getString(R.string.main_permissions_needed)
             tvPermissionsStatus.setTextColor(
                 if (allGranted) getColor(R.color.status_ok)
                 else getColor(R.color.status_warning)
             )
 
             tvPermissionsDetails.text = buildString {
-                append("无障碍: ${if (accessibility) "✓" else "✗"}\n")
-                append("悬浮窗: ${if (overlay) "✓" else "✗"}\n")
-                append("录屏: ${if (screenCapture) "✓" else "✗"} (${AccessibilityProxy.getMediaProjectionStatus()})")
+                append("${getString(R.string.accessibility_service)}: ${if (accessibility) "✓" else "✗"}\n")
+                append("${getString(R.string.main_overlay_permission)}: ${if (overlay) "✓" else "✗"}\n")
+                append("${getString(R.string.main_screen_capture)}: ${if (screenCapture) "✓" else "✗"} (${AccessibilityProxy.getMediaProjectionStatus()})")
             }
         }
     }
@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
             val totalSkills = allSkills.size
 
             binding.apply {
-                tvSkillsStatus.text = "$totalSkills 个 Skills"
+                tvSkillsStatus.text = getString(R.string.total_skills, totalSkills)
                 tvSkillsStatus.setTextColor(getColor(R.color.status_ok))
 
                 tvSkillsDetails.text = buildString {
@@ -219,364 +219,212 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } catch (e: Exception) {
-            binding.tvSkillsStatus.text = "加载失败"
-            binding.tvSkillsDetails.text = e.message ?: "未知错误"
+            binding.tvSkillsStatus.text = getString(R.string.main_skills_loading_failed)
+            binding.tvSkillsDetails.text = e.message ?: getString(R.string.main_unknown_error)
         }
     }
 
-    /**
-     * Update Sessions status card
-     */
     private fun updateSessionsCard() {
         val sessionCount = getSessionCount()
-
         binding.apply {
             tvSessionsStatus.text = if (sessionCount > 0) {
-                "$sessionCount 个活跃会话"
+                getString(R.string.active_sessions, sessionCount)
             } else {
-                "无活跃会话"
+                getString(R.string.no_active_sessions)
             }
             tvSessionsStatus.setTextColor(
                 if (sessionCount > 0) getColor(R.color.status_ok)
                 else getColor(R.color.text_secondary)
             )
-
             tvSessionsDetails.text = if (sessionCount > 0) {
-                "点击查看详情"
+                getString(R.string.main_view_details)
             } else {
-                "暂无活跃的 Agent 会话"
+                getString(R.string.main_no_active_agent_sessions)
             }
         }
     }
 
-    /**
-     * Show Gateway detailed information
-     * Maps to OmniClaw CLI: omniclaw gateway status
-     */
     private fun showGatewayInfo() {
         val info = buildString {
-            append("Gateway 状态\n\n")
-            append("WebSocket 端口: 8765\n")
-            append("连接地址: ws://0.0.0.0:8765\n")
-            append("活跃 Sessions: ${getSessionCount()}\n\n")
-            append("RPC 方法:\n")
-            append("  • agent - 执行 Agent 任务\n")
-            append("  • agent.wait - 等待任务完成\n")
-            append("  • health - 健康检查\n")
-            append("  • session.list - 列出会话\n")
-            append("  • session.reset - 重置会话\n")
+            append(getString(R.string.main_gateway_status_title) + "\n\n")
+            append("WebSocket port: 8765\n")
+            append("Address: ws://0.0.0.0:8765\n")
+            append(getString(R.string.active_sessions, getSessionCount()) + "\n\n")
+            append("RPC methods:\n")
+            append("  • agent - Execute Agent task\n")
+            append("  • agent.wait - Wait for task completion\n")
+            append("  • health - Health check\n")
+            append("  • session.list - List sessions\n")
+            append("  • session.reset - Reset session\n")
         }
 
         androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("Gateway 信息")
+            .setTitle(getString(R.string.main_gateway_info_title))
             .setMessage(info)
-            .setPositiveButton("关闭", null)
-            .setNeutralButton("测试连接") { _, _ ->
-                Toast.makeText(this, if (isGatewayRunning()) "Gateway 运行正常 ✅" else "Gateway 未运行 ❌", Toast.LENGTH_SHORT).show()
+            .setPositiveButton(getString(R.string.skills_close), null)
+            .setNeutralButton(getString(R.string.main_test_connection)) { _, _ ->
+                Toast.makeText(this, if (isGatewayRunning()) getString(R.string.main_gateway_ok) else getString(R.string.main_gateway_not_running), Toast.LENGTH_SHORT).show()
             }
             .show()
     }
 
-    /**
-     * Show permissions dialog
-     */
     private fun showPermissionsDialog() {
         val accessibility = AccessibilityProxy.isConnected.value == true && AccessibilityProxy.isServiceReady()
         val overlay = Settings.canDrawOverlays(this)
         val screenCapture = AccessibilityProxy.isMediaProjectionGranted()
-
         val message = buildString {
-            append("权限状态:\n\n")
-            append("${if (accessibility) "✓" else "✗"} 无障碍服务\n")
+            append(getString(R.string.main_permission_status_title) + ":\n\n")
+            append("${if (accessibility) "✓" else "✗"} ${getString(R.string.accessibility_service)}\n")
             if (!accessibility) {
-                append("  用于: 点击、滑动、输入\n\n")
+                append("  ${getString(R.string.main_permission_accessibility_desc)}\n\n")
             }
-            append("${if (overlay) "✓" else "✗"} 悬浮窗权限\n")
+            append("${if (overlay) "✓" else "✗"} ${getString(R.string.main_overlay_permission)}\n")
             if (!overlay) {
-                append("  用于: 显示 Agent 状态\n\n")
+                append("  ${getString(R.string.main_permission_overlay_desc)}\n\n")
             }
-            append("${if (screenCapture) "✓" else "✗"} 录屏权限\n")
+            append("${if (screenCapture) "✓" else "✗"} ${getString(R.string.main_screen_capture)}\n")
             if (!screenCapture) {
-                append("  用于: 截图观察界面\n")
-                append("  状态: ${AccessibilityProxy.getMediaProjectionStatus()}\n")
+                append("  ${getString(R.string.main_permission_screen_desc)}\n")
+                append("  ${getString(R.string.main_status_label)}: ${AccessibilityProxy.getMediaProjectionStatus()}\n")
             }
         }
-
         androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("权限管理")
+            .setTitle(getString(R.string.main_permission_manage_title))
             .setMessage(message)
-            .setPositiveButton("前往设置") { _, _ ->
-                requestPermissions()
-            }
-            .setNegativeButton("取消", null)
+            .setPositiveButton(getString(R.string.main_go_to_settings)) { _, _ -> requestPermissions() }
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
-    /**
-     * Request permissions
-     */
     private fun requestPermissions() {
         val accessibility = AccessibilityProxy.isConnected.value == true && AccessibilityProxy.isServiceReady()
         val overlay = Settings.canDrawOverlays(this)
         val screenCapture = AccessibilityProxy.isMediaProjectionGranted()
-
         when {
-            !accessibility -> {
-                // Open accessibility settings
-                val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-                startActivityForResult(intent, REQUEST_ACCESSIBILITY)
-            }
-            !overlay -> {
-                // Request overlay permission
-                val intent = Intent(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    android.net.Uri.parse("package:$packageName")
-                )
-                startActivityForResult(intent, REQUEST_OVERLAY)
-            }
-            !screenCapture -> {
-                // Screen recording permission managed by accessibility service APK
-                Toast.makeText(
-                    this,
-                    "录屏权限由无障碍服务 APK 管理\n请在系统设置中授予",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else -> {
-                Toast.makeText(this, "所有权限已授予", Toast.LENGTH_SHORT).show()
-            }
+            !accessibility -> startActivityForResult(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), REQUEST_ACCESSIBILITY)
+            !overlay -> startActivityForResult(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")), REQUEST_OVERLAY)
+            !screenCapture -> Toast.makeText(this, getString(R.string.main_screen_capture_managed), Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(this, getString(R.string.main_all_permissions_granted), Toast.LENGTH_SHORT).show()
         }
     }
 
-    /**
-     * Check if Gateway is running
-     */
-    private fun isGatewayRunning(): Boolean {
-        return try {
-            val app = application as? MyApplication
-            java.net.Socket().use { s -> s.connect(java.net.InetSocketAddress("127.0.0.1", 8765), 500); true }
-        } catch (e: Exception) {
-            false
-        }
-    }
-
-    /**
-     * Get active Session count
-     */
-    private fun getSessionCount(): Int {
-        return try {
-            val app = application as? MyApplication
-            SessionManager().getSessionCount()
-        } catch (e: Exception) {
-            0
-        }
-    }
-
-
-    /**
-     * Show Skills management dialog
-     * Maps to: omniclaw skills
-     */
     private fun showSkillsDialog() {
         try {
             val skillsLoader = SkillsLoader(this)
             val allSkills = skillsLoader.getAllSkills()
-
             val message = buildString {
-                if (allSkills.isEmpty()) {
-                    append("暂无已安装的 Skills")
-                } else {
-                    allSkills.forEachIndexed { index, skill ->
-                        val emoji = skill.metadata.emoji ?: "📋"
-                        val always = if (skill.metadata.always) " [Always]" else ""
-                        append("${index + 1}. $emoji ${skill.name}$always\n")
-                        append("   ${skill.description.lines().first().take(50)}\n\n")
-                    }
+                if (allSkills.isEmpty()) append(getString(R.string.main_no_skills_installed))
+                else allSkills.forEachIndexed { index, skill ->
+                    val emoji = skill.metadata.emoji ?: "📋"
+                    val always = if (skill.metadata.always) " [Always]" else ""
+                    append("${index + 1}. $emoji ${skill.name}$always\n")
+                    append("   ${skill.description.lines().firstOrNull()?.take(50) ?: ""}\n\n")
                 }
             }
-
             androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Skills 管理 (${allSkills.size} 个)")
+                .setTitle(getString(R.string.skills_title) + " (${allSkills.size})")
                 .setMessage(message)
-                .setPositiveButton("关闭", null)
+                .setPositiveButton(getString(R.string.skills_close), null)
                 .show()
         } catch (e: Exception) {
-            Toast.makeText(this, "加载 Skills 失败: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.main_skills_loading_failed) + ": ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
-    /**
-     * Show Sessions list dialog
-     * Maps to: omniclaw sessions
-     */
     private fun showSessionsDialog() {
         try {
             val sessionManager = SessionManager()
             val sessions = sessionManager.getAllSessions()
-
             val message = buildString {
-                if (sessions.isEmpty()) {
-                    append("暂无活跃会话")
-                } else {
-                    sessions.forEachIndexed { index, session ->
-                        append("${index + 1}. ${session.title}\n")
-                        append("   消息数: ${session.messages.size}\n\n")
-                    }
+                if (sessions.isEmpty()) append(getString(R.string.no_active_sessions))
+                else sessions.forEachIndexed { index, session ->
+                    append("${index + 1}. ${session.title}\n")
+                    append(getString(R.string.main_messages_count, session.messages.size) + "\n\n")
                 }
             }
-
             androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("会话列表 (${sessions.size} 个)")
+                .setTitle(getString(R.string.main_session_list_title, sessions.size))
                 .setMessage(message)
-                .setPositiveButton("关闭", null)
+                .setPositiveButton(getString(R.string.skills_close), null)
                 .show()
         } catch (e: Exception) {
-            Toast.makeText(this, "加载会话失败: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.main_load_sessions_failed) + ": ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
-    /**
-     * Show Logs viewer dialog
-     * Maps to: viewing AgentLoop session logs
-     */
     private fun showLogsDialog() {
         val logDir = File("/sdcard/.xomniclaw/workspace/logs")
         if (!logDir.exists() || !logDir.isDirectory) {
-            Toast.makeText(this, "暂无日志文件", Toast.LENGTH_SHORT).show()
-            return
+            Toast.makeText(this, getString(R.string.main_no_logs), Toast.LENGTH_SHORT).show(); return
         }
-
-        val logFiles = logDir.listFiles()
-            ?.filter { it.name.endsWith(".log") }
-            ?.sortedByDescending { it.lastModified() }
-            ?.take(20)
-            ?: emptyList()
-
-        if (logFiles.isEmpty()) {
-            Toast.makeText(this, "暂无日志文件", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val fileNames = logFiles.map { file ->
-            val sizeKb = file.length() / 1024
-            "${file.name} (${sizeKb}KB)"
-        }.toTypedArray()
-
+        val logFiles = logDir.listFiles()?.filter { it.name.endsWith(".log") }?.sortedByDescending { it.lastModified() }?.take(20) ?: emptyList()
+        if (logFiles.isEmpty()) { Toast.makeText(this, getString(R.string.main_no_logs), Toast.LENGTH_SHORT).show(); return }
+        val fileNames = logFiles.map { file -> "${file.name} (${file.length() / 1024}KB)" }.toTypedArray()
         androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("AgentLoop 日志 (${logFiles.size} 个)")
-            .setItems(fileNames) { _, which ->
-                showLogContent(logFiles[which])
-            }
-            .setPositiveButton("关闭", null)
+            .setTitle(getString(R.string.main_logs_title, logFiles.size))
+            .setItems(fileNames) { _, which -> showLogContent(logFiles[which]) }
+            .setPositiveButton(getString(R.string.skills_close), null)
             .show()
     }
 
-    /**
-     * Show specific log file content
-     */
     private fun showLogContent(file: File) {
         try {
             val content = file.readText()
-            val truncated = if (content.length > 5000) {
-                content.take(5000) + "\n\n... (${content.length - 5000} chars truncated)"
-            } else content
-
+            val truncated = if (content.length > 5000) content.take(5000) + "\n\n... (${content.length - 5000} ${getString(R.string.main_chars_truncated)})" else content
             androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle(file.name)
                 .setMessage(truncated)
-                .setPositiveButton("关闭", null)
+                .setPositiveButton(getString(R.string.skills_close), null)
                 .show()
         } catch (e: Exception) {
-            Toast.makeText(this, "读取日志失败: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.main_read_log_failed) + ": ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
-    /**
-     * Check for app updates from GitHub Releases
-     */
     private fun checkForUpdate() {
-        Toast.makeText(this, "正在检查更新...", Toast.LENGTH_SHORT).show()
-
+        Toast.makeText(this, getString(R.string.checking_updates), Toast.LENGTH_SHORT).show()
         lifecycleScope.launch {
             try {
                 val updater = AppUpdater(this@MainActivity)
                 val info = updater.checkForUpdate()
-
-                if (info.hasUpdate) {
-                    showUpdateDialog(updater, info)
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "已是最新版本 v${info.currentVersion}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                if (info.hasUpdate) showUpdateDialog(updater, info)
+                else Toast.makeText(this@MainActivity, getString(R.string.already_latest, info.currentVersion), Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "检查更新失败: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@MainActivity, getString(R.string.update_failed) + ": ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    /**
-     * Show update available dialog
-     */
     private fun showUpdateDialog(updater: AppUpdater, info: AppUpdater.UpdateInfo) {
-        val sizeStr = if (info.fileSize > 0) {
-            "%.1f MB".format(info.fileSize / 1024.0 / 1024.0)
-        } else "未知大小"
-
+        val sizeStr = if (info.fileSize > 0) "%.1f MB".format(info.fileSize / 1024.0 / 1024.0) else getString(R.string.main_unknown_size)
         val message = buildString {
-            append("发现新版本！\n\n")
-            append("当前版本: v${info.currentVersion}\n")
-            append("最新版本: v${info.latestVersion}\n")
-            append("文件大小: $sizeStr\n")
-            if (!info.publishedAt.isNullOrEmpty()) {
-                append("发布时间: ${info.publishedAt.take(10)}\n")
-            }
-            if (!info.releaseNotes.isNullOrEmpty()) {
-                append("\n更新内容:\n${info.releaseNotes.take(300)}")
-            }
+            append(getString(R.string.update_available) + "!\n\n")
+            append(getString(R.string.config_current_version, info.currentVersion) + "\n")
+            append(getString(R.string.config_new_version, info.latestVersion) + "\n")
+            append(getString(R.string.main_file_size_label) + ": $sizeStr\n")
+            if (!info.publishedAt.isNullOrEmpty()) append(getString(R.string.main_published_label) + ": ${info.publishedAt.take(10)}\n")
+            if (!info.releaseNotes.isNullOrEmpty()) append("\n${getString(R.string.main_changelog_label)}:\n${info.releaseNotes.take(300)}")
         }
-
         androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("发现新版本 v${info.latestVersion}")
+            .setTitle(getString(R.string.update_available) + " v${info.latestVersion}")
             .setMessage(message)
-            .setPositiveButton("立即更新") { _, _ ->
+            .setPositiveButton(getString(R.string.update_now)) { _, _ ->
                 if (info.downloadUrl != null) {
-                    Toast.makeText(this, "开始下载...", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.config_downloading), Toast.LENGTH_SHORT).show()
                     lifecycleScope.launch {
                         val success = updater.downloadAndInstall(info.downloadUrl, info.latestVersion)
-                        if (!success) {
-                            // Fallback: open browser
-                            openUrl(info.releaseUrl)
-                        }
+                        if (!success) openUrl(info.releaseUrl)
                     }
-                } else {
-                    // No direct download URL, open GitHub releases page
-                    openUrl(info.releaseUrl)
-                }
+                } else openUrl(info.releaseUrl)
             }
-            .setNeutralButton("在浏览器中打开") { _, _ ->
-                openUrl(info.releaseUrl)
-            }
-            .setNegativeButton("稍后再说", null)
+            .setNeutralButton(getString(R.string.config_open_browser)) { _, _ -> openUrl(info.releaseUrl) }
+            .setNegativeButton(getString(R.string.update_later), null)
             .show()
     }
 
-    /**
-     * Open URL in browser
-     */
     private fun openUrl(url: String) {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(this, "无法打开浏览器: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+        try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
+        catch (e: Exception) { Toast.makeText(this, getString(R.string.setup_open_browser_failed) + ": ${e.message}", Toast.LENGTH_SHORT).show() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -588,5 +436,15 @@ class MainActivity : AppCompatActivity() {
                 updateStatusCards()
             }
         }
+    }
+
+    private fun isGatewayRunning(): Boolean {
+        return try {
+            java.net.Socket().use { s -> s.connect(java.net.InetSocketAddress("127.0.0.1", 8765), 500); true }
+        } catch (e: Exception) { false }
+    }
+
+    private fun getSessionCount(): Int {
+        return try { SessionManager().getSessionCount() } catch (e: Exception) { 0 }
     }
 }

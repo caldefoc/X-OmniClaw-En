@@ -22,6 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.shijing.xomniclaw.R
 import com.shijing.xomniclaw.config.ConfigLoader
 import kotlinx.coroutines.launch
 
@@ -76,7 +78,7 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                 title = { Text("Feishu Channel") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Filled.ArrowBack, "返回")
+                        Icon(Icons.Filled.ArrowBack, stringResource(R.string.back))
                     }
                 },
                 actions = {
@@ -115,7 +117,7 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                             }
                         }
                     ) {
-                        Text("保存")
+                        Text(stringResource(R.string.save))
                     }
                 }
             )
@@ -129,7 +131,7 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                 Snackbar(
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    Text("配置已保存")
+                    Text(stringResource(R.string.config_saved))
                 }
             }
         }
@@ -153,11 +155,11 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "启用 Feishu Channel",
+                            text = stringResource(R.string.feishu_enable_title),
                             style = MaterialTheme.typography.titleMedium
                         )
                         Text(
-                            text = "开启后将接收飞书消息",
+                            text = stringResource(R.string.feishu_enable_desc),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -171,7 +173,7 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
 
             // 基础配置
             Text(
-                text = "基础配置",
+                text = stringResource(R.string.feishu_basic_config),
                 style = MaterialTheme.typography.titleLarge
             )
 
@@ -188,14 +190,14 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                 value = appSecret,
                 onValueChange = { appSecret = it },
                 label = { Text("App Secret") },
-                placeholder = { Text("输入 App Secret") },
+                placeholder = { Text(stringResource(R.string.feishu_app_secret_placeholder)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
 
             // DM 策略
             Text(
-                text = "私聊策略 (DM Policy)",
+                text = stringResource(R.string.feishu_dm_policy_title),
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -209,10 +211,10 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                                 Text(policy.replaceFirstChar { it.uppercase() })
                                 Text(
                                     text = when (policy) {
-                                        "open" -> "接受所有私聊"
-                                        "pairing" -> "需要配对后才能使用"
-                                        "allowlist" -> "仅白名单用户"
-                                        else -> "其他策略"
+                                        "open" -> stringResource(R.string.feishu_dm_open_desc)
+                                        "pairing" -> stringResource(R.string.feishu_dm_pairing_desc)
+                                        "allowlist" -> stringResource(R.string.feishu_dm_allowlist_desc)
+                                        else -> stringResource(R.string.feishu_dm_other_desc)
                                     },
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -226,7 +228,7 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
 
             // 群聊策略
             Text(
-                text = "群聊策略 (Group Policy)",
+                text = stringResource(R.string.feishu_group_policy_title),
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -240,9 +242,9 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                                 Text(policy.replaceFirstChar { it.uppercase() })
                                 Text(
                                     text = when (policy) {
-                                        "open" -> "接受所有群聊"
-                                        "allowlist" -> "仅白名单群聊"
-                                        "disabled" -> "禁用群聊"
+                                        "open" -> stringResource(R.string.feishu_group_open_desc)
+                                        "allowlist" -> stringResource(R.string.feishu_group_allowlist_desc)
+                                        "disabled" -> stringResource(R.string.feishu_group_disabled_desc)
                                         else -> ""
                                     },
                                     style = MaterialTheme.typography.bodySmall,
@@ -260,8 +262,8 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                 OutlinedTextField(
                     value = groupAllowFrom,
                     onValueChange = { groupAllowFrom = it },
-                    label = { Text("群聊白名单") },
-                    placeholder = { Text("每行一个群聊ID\noc_xxxxxx") },
+                    label = { Text(stringResource(R.string.feishu_group_allowlist_label)) },
+                    placeholder = { Text(stringResource(R.string.feishu_group_allowlist_placeholder)) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(120.dp),
@@ -280,11 +282,11 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "群聊需要 @ 提及",
+                            text = stringResource(R.string.feishu_mention_label),
                             style = MaterialTheme.typography.titleMedium
                         )
                         Text(
-                            text = "开启后仅响应 @ 机器人的消息",
+                            text = stringResource(R.string.feishu_mention_desc),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -298,7 +300,7 @@ fun FeishuChannelScreen(onBack: () -> Unit, context: android.content.Context = a
 
             // 配置文件路径提示
             Text(
-                text = "配置保存在:\n/sdcard/.xomniclaw/xomniclaw.json (channels.feishu)",
+                text = stringResource(R.string.feishu_config_path),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(vertical = 8.dp)

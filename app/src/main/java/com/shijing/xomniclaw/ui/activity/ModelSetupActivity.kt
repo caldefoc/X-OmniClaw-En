@@ -51,7 +51,7 @@ class ModelSetupActivity : AppCompatActivity() {
                     val key = provider.apiKey
                     !key.isNullOrBlank() &&
                             !key.startsWith("\${") &&
-                            key != "未配置"
+                            key != context.getString(R.string.model_unconfigured)
                 }
                 return !hasRealKey
             } catch (e: Exception) {
@@ -66,13 +66,13 @@ class ModelSetupActivity : AppCompatActivity() {
                 name = "OpenRouter",
                 baseUrl = "https://openrouter.ai/api/v1",
                 api = "openai-completions",
-                hint = "OpenRouter 聚合了 Claude、GPT、Gemini 等多个模型，一个 Key 即可使用全部。\n注册即可免费使用，无需充值！",
+                hint = "OpenRouter aggregates multiple models (Claude, GPT, Gemini, etc.). One key covers all. Free tier available upon registration!",
                 models = listOf(
-                    ModelPreset("moonshotai/kimi-k2.6", "Kimi K2.6 (付费)", reasoning = true, contextWindow = 262144, maxTokens = 16384),
-                    ModelPreset("z-ai/glm-5v-turbo", "GLM 5V Turbo (付费)", contextWindow = 131072, maxTokens = 8192),
-                    ModelPreset("qwen/qwen3.6-flash", "Qwen 3.6 Flash (付费，推荐)", reasoning = true, contextWindow = 200000, maxTokens = 16384),
-                    ModelPreset("xiaomi/mimo-v2.5", "Xiaomi Mimo v2.5 (付费)", contextWindow = 200000, maxTokens = 16384),
-                    ModelPreset("openai/gpt-5.5", "GPT-5.5 (付费)", reasoning = true, contextWindow = 1048576, maxTokens = 32768),
+                    ModelPreset("moonshotai/kimi-k2.6", "Kimi K2.6 (Paid)", reasoning = true, contextWindow = 262144, maxTokens = 16384),
+                    ModelPreset("z-ai/glm-5v-turbo", "GLM 5V Turbo (Paid)", contextWindow = 131072, maxTokens = 8192),
+                    ModelPreset("qwen/qwen3.6-flash", "Qwen 3.6 Flash (Paid, Recommended)", reasoning = true, contextWindow = 200000, maxTokens = 16384),
+                    ModelPreset("xiaomi/mimo-v2.5", "Xiaomi Mimo v2.5 (Paid)", contextWindow = 200000, maxTokens = 16384),
+                    ModelPreset("openai/gpt-5.5", "GPT-5.5 (Paid)", reasoning = true, contextWindow = 1048576, maxTokens = 32768),
                 ),
                 authHeader = true
             ),
@@ -80,22 +80,22 @@ class ModelSetupActivity : AppCompatActivity() {
                 name = "Anthropic",
                 baseUrl = "https://api.anthropic.com/v1",
                 api = "anthropic-messages",
-                hint = "Anthropic 官方 API，直连 Claude。注册: console.anthropic.com",
+                hint = "Anthropic official API, direct Claude access. Register: console.anthropic.com",
                 models = listOf(
-                    ModelPreset("claude-sonnet-4-20250514", "Claude Sonnet 4 (推荐)"),
+                    ModelPreset("claude-sonnet-4-20250514", "Claude Sonnet 4 (Recommended)"),
                     ModelPreset("claude-opus-4-20250514", "Claude Opus 4"),
-                    ModelPreset("claude-haiku-3-5-20241022", "Claude 3.5 Haiku (快速)")
+                    ModelPreset("claude-haiku-3-5-20241022", "Claude 3.5 Haiku (Fast)")
                 )
             ),
             "openai" to ProviderPreset(
                 name = "OpenAI",
                 baseUrl = "https://api.openai.com/v1",
                 api = "openai-completions",
-                hint = "OpenAI 官方 API。注册: platform.openai.com",
+                hint = "OpenAI official API. Register: platform.openai.com",
                 models = listOf(
-                    ModelPreset("gpt-4.1", "GPT-4.1 (推荐)"),
-                    ModelPreset("gpt-4.1-mini", "GPT-4.1 Mini (快速)"),
-                    ModelPreset("o3", "o3 (推理)")
+                    ModelPreset("gpt-4.1", "GPT-4.1 (Recommended)"),
+                    ModelPreset("gpt-4.1-mini", "GPT-4.1 Mini (Fast)"),
+                    ModelPreset("o3", "o3 (Reasoning)")
                 )
             )
         )
@@ -113,7 +113,7 @@ class ModelSetupActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            title = "模型设置"
+            title = getString(R.string.setup_title)
         }
 
         setupDefaultMode()
@@ -136,7 +136,7 @@ class ModelSetupActivity : AppCompatActivity() {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://openrouter.ai/keys")))
             } catch (e: Exception) {
-                Toast.makeText(this, "无法打开浏览器", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.setup_open_browser_failed, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -149,9 +149,9 @@ class ModelSetupActivity : AppCompatActivity() {
             advancedExpanded = !advancedExpanded
             binding.layoutAdvanced.visibility = if (advancedExpanded) View.VISIBLE else View.GONE
             binding.tvAdvanced.text = if (advancedExpanded) {
-                "⚙️ 收起高级选项"
+                getString(R.string.setup_collapse)
             } else {
-                "⚙️ 使用其他服务商（Anthropic / OpenAI 等）"
+                getString(R.string.setup_expand)
             }
 
             // 收起高级选项时恢复为与首次引导一致：OpenRouter
@@ -204,9 +204,9 @@ class ModelSetupActivity : AppCompatActivity() {
                 else -> "API Key"
             }
             (tilApiKey as? com.google.android.material.textfield.TextInputLayout)?.helperText = when (providerKey) {
-                "openrouter" -> "以 sk-or-v1- 开头"
-                "anthropic" -> "以 sk-ant- 开头"
-                "openai" -> "以 sk- 开头"
+                "openrouter" -> getString(R.string.setup_key_hint_sk_or)
+                "anthropic" -> getString(R.string.setup_key_hint_sk_ant)
+                "openai" -> getString(R.string.setup_key_hint_sk)
                 else -> null
             }
 
@@ -277,11 +277,11 @@ class ModelSetupActivity : AppCompatActivity() {
 
             Log.i(TAG, "用户跳过模型配置，已写入内置默认配置: ${target.absolutePath}")
             markSetupSeen()
-            Toast.makeText(this, "已使用默认配置", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.setup_skip_success, Toast.LENGTH_SHORT).show()
             finish()
         } catch (e: Exception) {
             Log.e(TAG, "跳过并写入默认配置失败", e)
-            Toast.makeText(this, "跳过失败，请先授予文件管理权限后重试", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.setup_skip_failed, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -308,7 +308,7 @@ class ModelSetupActivity : AppCompatActivity() {
                 Log.e(TAG, "无法打开文件管理权限设置页", e2)
             }
         }
-        Toast.makeText(this, "请先授予“所有文件访问权限”，然后再点一次“跳过”", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, R.string.setup_grant_permission_first, Toast.LENGTH_LONG).show()
         return false
     }
 
@@ -320,7 +320,7 @@ class ModelSetupActivity : AppCompatActivity() {
         val apiKey = if (userInputKey.isNullOrEmpty()) {
             val builtInKey = com.shijing.xomniclaw.config.BuiltInKeyProvider.getKey()
             if (builtInKey.isNullOrEmpty()) {
-                binding.tilApiKey.error = "请输入 API Key"
+                binding.tilApiKey.error = getString(R.string.model_config_api_key_required)
                 return
             }
             builtInKey
@@ -346,6 +346,11 @@ class ModelSetupActivity : AppCompatActivity() {
         val matchedPreset = choice
 
         binding.tilModel.error = null
+
+        if (!ensureStoragePermissionForDefaultConfig()) {
+            Toast.makeText(this, R.string.setup_grant_permission_first, Toast.LENGTH_LONG).show()
+            return
+        }
 
         try {
             val config = configLoader.loadOmniClawConfig()
@@ -388,16 +393,20 @@ class ModelSetupActivity : AppCompatActivity() {
                 agents = updatedAgents
             )
 
-            configLoader.saveOmniClawConfig(updatedConfig)
+            val saved = configLoader.saveOmniClawConfig(updatedConfig)
+            if (!saved) {
+                Toast.makeText(this, getString(R.string.config_save_failed), Toast.LENGTH_LONG).show()
+                return
+            }
 
-            Log.i(TAG, "✅ 模型配置已保存: provider=$providerName, model=$modelId")
+            Log.i(TAG, "✅ Model config saved: provider=$providerName, model=$modelId")
             markSetupSeen()
-            Toast.makeText(this, "✅ 配置完成！", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.setup_save_success, Toast.LENGTH_SHORT).show()
             finish()
 
         } catch (e: Exception) {
-            Log.e(TAG, "保存配置失败", e)
-            Toast.makeText(this, "保存失败: ${e.message}", Toast.LENGTH_LONG).show()
+            Log.e(TAG, "Failed to save config", e)
+            Toast.makeText(this, getString(R.string.config_save_failed) + ": ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 

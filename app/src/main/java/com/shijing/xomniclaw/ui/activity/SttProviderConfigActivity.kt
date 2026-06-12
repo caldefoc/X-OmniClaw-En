@@ -10,6 +10,7 @@ import com.shijing.xomniclaw.config.ConfigLoader
 import com.shijing.xomniclaw.config.ModelDefinition
 import com.shijing.xomniclaw.config.ModelsConfig
 import com.shijing.xomniclaw.config.ProviderConfig
+import com.shijing.xomniclaw.R
 import com.shijing.xomniclaw.databinding.ActivitySttProviderConfigBinding
 
 /**
@@ -71,7 +72,7 @@ class SttProviderConfigActivity : AppCompatActivity() {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TUTORIAL_URL)))
             } catch (e: Exception) {
-                Toast.makeText(this, "无法打开浏览器", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.stt_open_browser_failed, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -126,13 +127,13 @@ class SttProviderConfigActivity : AppCompatActivity() {
                 )
             )
             configLoader.saveOmniClawConfig(updatedConfig)
-            Toast.makeText(this, "STT Provider 已保存", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.stt_save_success, Toast.LENGTH_SHORT).show()
             // 显式回传成功结果，便于调用页按“已保存”语义刷新状态。
             setResult(RESULT_OK)
             finish()
         } catch (e: Exception) {
             Log.e(TAG, "保存 STT Key 失败", e)
-            Toast.makeText(this, "保存失败: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.config_save_failed) + ": ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 }

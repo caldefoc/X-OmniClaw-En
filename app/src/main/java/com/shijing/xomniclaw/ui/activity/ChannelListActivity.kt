@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.shijing.xomniclaw.R
 import com.tencent.mmkv.MMKV
 
 /**
@@ -60,7 +62,7 @@ fun ChannelListScreen(onBack: () -> Unit) {
                 title = { Text("Channels") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Filled.ArrowBack, "返回")
+                        Icon(Icons.Filled.ArrowBack, stringResource(R.string.back))
                     }
                 }
             )
@@ -74,7 +76,7 @@ fun ChannelListScreen(onBack: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "配置多渠道接入",
+                text = stringResource(R.string.channels_subtitle),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -83,8 +85,8 @@ fun ChannelListScreen(onBack: () -> Unit) {
 
             // Feishu Channel card
             ChannelCard(
-                name = "Feishu (飞书)",
-                description = "飞书群聊和私聊接入",
+                name = stringResource(R.string.channels_feishu_name),
+                description = stringResource(R.string.channels_feishu_desc),
                 enabled = feishuEnabled,
                 onClick = {
                     // Navigate to Feishu configuration page
@@ -95,8 +97,8 @@ fun ChannelListScreen(onBack: () -> Unit) {
 
             // Discord Channel card
             ChannelCard(
-                name = "Discord",
-                description = "Discord 服务器和私聊接入",
+                name = stringResource(R.string.channels_discord_name),
+                description = stringResource(R.string.channels_discord_desc),
                 enabled = discordEnabled,
                 onClick = {
                     val intent = Intent(context, DiscordChannelActivity::class.java)
@@ -145,7 +147,7 @@ fun ChannelCard(
             if (enabled) {
                 Icon(
                     imageVector = Icons.Default.CheckCircle,
-                    contentDescription = "已启用",
+                    contentDescription = stringResource(R.string.channels_enabled),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }

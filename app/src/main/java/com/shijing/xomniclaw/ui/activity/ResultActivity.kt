@@ -9,6 +9,7 @@ package com.shijing.xomniclaw.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.shijing.xomniclaw.R
 import com.shijing.xomniclaw.databinding.ActivityChatHistoryBinding
 import com.shijing.xomniclaw.ui.adapter.ResultRecyclerAdapter
 import com.shijing.xomniclaw.util.ResultUtil
@@ -24,7 +25,7 @@ class ResultActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            title = "结果记录"
+            title = getString(R.string.result_title)
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

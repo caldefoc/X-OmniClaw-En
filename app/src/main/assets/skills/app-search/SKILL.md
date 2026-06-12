@@ -1,7 +1,7 @@
 ---
 name: app-search
 description: |
-  主流APP搜索。当用户想要在拼多多、美团、高德地图、抖音、快手、小红书、哔哩哔哩、知乎、百度、OPPO音乐、OPPO软件商店等APP中搜索时激活。覆盖电商购物、生活服务、短视频内容、知识搜索、音乐搜索、应用商店搜索等场景。
+  Mainstream app search. Activated when the user wants to search in apps like Pinduoduo, Meituan, Amap, Douyin, Kuaishou, Xiaohongshu, Bilibili, Zhihu, Baidu, OPPO Music, OPPO App Store, etc. Covers e-commerce, life services, short video content, knowledge search, music search, and app store search scenarios.
 metadata:
   {
     "xomniclaw": {

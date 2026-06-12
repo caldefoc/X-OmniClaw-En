@@ -231,7 +231,7 @@ object SessionFloatWindow {
             if (full != null) {
                 val cur = full.groupValues[1]
                 val max = full.groupValues[2]
-                return "步骤 $cur/$max"
+                return "Step $cur/$max"
             }
         }
 
@@ -241,7 +241,7 @@ object SessionFloatWindow {
                 ?: STEP_CN_RE.find(raw)?.groupValues?.getOrNull(1)
             if (!stepOnly.isNullOrBlank()) {
                 val maxPart = rememberedMax ?: "--"
-                return "步骤 $stepOnly/$maxPart"
+                return "Step $stepOnly/$maxPart"
             }
         }
         return null

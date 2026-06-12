@@ -1,0 +1,3 @@
+194:                 append("无障碍: ${if (accessibility) "✓" else "✗"}\n")
+195:                 append("悬浮窗: ${if (overlay) "✓" else "✗"}\n")
+196:                 append("录屏: ${if (screenCapture) "✓" else "✗"} (${AccessibilityProxy.getMediaProjectionStatus()})")

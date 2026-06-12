@@ -2,7 +2,7 @@
 <resources>
     <color name="green">#66BB6A</color>
 
-    <!-- Todos 相关颜色 -->
+    <!-- Todos 相关颜色 - 暗色柔和版 -->
     <color name="primary_color">#90CAF9</color>
     <color name="status_pending">#FFD54F</color>
     <color name="status_executing">#64B5F6</color>
@@ -10,30 +10,30 @@
     <color name="status_failed">#E57373</color>
     <color name="status_skipped">#BDBDBD</color>
 
-    <!-- MainActivity 状态颜色 -->
-    <color name="status_ok">#81C784</color>      <!-- 绿色 - 正常 -->
-    <color name="status_warning">#FFD54F</color> <!-- 黄色 - 警告 -->
-    <color name="status_error">#E57373</color>   <!-- 红色 - 错误 -->
-    <color name="text_secondary">#AAAAAA</color> <!-- 次要文本 -->
+    <!-- MainActivity 状态颜色 - 暗色柔和版 -->
+    <color name="status_ok">#81C784</color>
+    <color name="status_warning">#FFD54F</color>
+    <color name="status_error">#E57373</color>
+    <color name="text_secondary">#AAAAAA</color>
 
-    <!-- 暗色背景覆盖层颜色（悬浮窗等）- 暗模式下微调 -->
+    <!-- 暗色背景覆盖层颜色（悬浮窗等） -->
     <color name="overlay_background_dark">#CC111111</color>
     <color name="overlay_background_darker">#B3000000</color>
 
-    <!-- 标签/标记颜色 - 暗模式下更柔和 -->
+    <!-- 标签/标记颜色 - 暗色 -->
     <color name="tag_background">#2979FF</color>
     <color name="tag_text_color">#FFFFFF</color>
     <color name="tag_auto_text">#82B1FF</color>
 
-    <!-- 文本颜色 -->
+    <!-- 文本颜色 - 暗色 -->
     <color name="text_white">#FFFFFF</color>
     <color name="text_white_translucent">#CCFFFFFF</color>
     <color name="text_primary">#E0E0E0</color>
 
-    <!-- 按钮/图标颜色 -->
+    <!-- 按钮/图标颜色 - 暗色 -->
     <color name="icon_primary">#BDBDBD</color>
 
-    <!-- Float Window 按钮背景色 - 暗模式下微调 -->
+    <!-- Float Window 按钮背景色 - 暗色 -->
     <color name="float_btn_bookmark">#388E3C</color>
     <color name="float_btn_stop_red">#C62828</color>
     <color name="float_btn_stop_purple">#6A1B9A</color>
@@ -42,7 +42,7 @@
     <color name="float_btn_disabled">#444444</color>
     <color name="float_btn_disabled_dark">#3A3A3A</color>
 
-    <!-- 悬浮窗半透明黑色覆盖层 - 暗模式与浅色一致（叠加层语义） -->
+    <!-- 悬浮窗半透明黑色覆盖层 - 暗色（与浅色一致，语义固定） -->
     <color name="overlay_semi_black_45">#73000000</color>
     <color name="overlay_semi_black_40">#66000000</color>
     <color name="overlay_semi_black_50">#80000000</color>

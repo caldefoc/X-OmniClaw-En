@@ -70,7 +70,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     private val _memoryWindowInfo = MutableStateFlow(
-        "当前保底可记忆会话轮数：0（保底${ConversationMemoryPolicy.HARD_KEEP_RECENT_DIALOG_TURNS}轮）"
+        "Rememberable turns: 0 (min ${ConversationMemoryPolicy.HARD_KEEP_RECENT_DIALOG_TURNS} turns guaranteed)"
     )
     val memoryWindowInfo: StateFlow<String> = _memoryWindowInfo.asStateFlow()
     private val _runningTasks = MutableStateFlow<List<RunningTaskStatus>>(emptyList())
@@ -224,13 +224,13 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         val totalTurns = messages.count { it.isUser }
         val rememberable = ConversationMemoryPolicy.rememberableTurns(totalTurns)
         _memoryWindowInfo.value = buildString {
-            append("当前保底可记忆会话轮数：")
+            append("Rememberable turns: ")
             append(rememberable)
-            append("（会话")
+            append(" (session ")
             append(totalTurns)
-            append("轮，保底")
+            append(" turns, min ")
             append(ConversationMemoryPolicy.HARD_KEEP_RECENT_DIALOG_TURNS)
-            append("轮）")
+            append(" guaranteed)")
         }
     }
 

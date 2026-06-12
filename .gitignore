@@ -32,3 +32,19 @@ releases/*.apk
 *.backup
 scripts_rm
 .gradle/
+logcat*
+
+# Android build outputs
+build/
+*/build/
+**/build/
+.cxx/
+*.iml
+local.properties
+.idea/
+*.hprof
+.DS_Store
+Thumbs.db
+.codegraph/
+opencode.json
+scripts/

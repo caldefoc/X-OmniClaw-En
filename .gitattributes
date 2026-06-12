@@ -1,1 +1,26 @@
+# Normalize line endings for all text files
+* text=auto
+
+# Explicitly mark text files
+*.kt text
+*.java text
+*.xml text
+*.gradle text
+*.properties text
+*.md text
+*.json text
+*.py text
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# Binary files
 videos/*.gif filter=lfs diff=lfs merge=lfs -text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.onnx binary
+*.jar binary
+*.so binary
+*.aar binary
+*.apk binary

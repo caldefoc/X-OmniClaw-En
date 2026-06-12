@@ -21,6 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.res.stringResource
+import com.shijing.xomniclaw.R
 
 /**
  * 按住录音按钮
@@ -58,7 +60,7 @@ fun VoiceRecordButton(
         // "识别中..." 浮动提示
         if (isListening) {
             Text(
-                text = "识别中...",
+                text = stringResource(R.string.voice_recognizing),
                 style = TextStyle(
                     fontSize = 11.sp,
                     color = Color(0xFFFF3B30),

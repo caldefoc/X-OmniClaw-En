@@ -31,6 +31,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
+import com.shijing.xomniclaw.R
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -107,9 +109,9 @@ fun CameraPreviewOverlay(
     }
 
     val sourceLabel = when (source) {
-        VisionFrameSource.CAMERA_BACK -> "后置摄像头"
-        VisionFrameSource.CAMERA_FRONT -> "前置摄像头"
-        VisionFrameSource.SCREEN_CAPTURE -> "屏幕画面"
+        VisionFrameSource.CAMERA_BACK -> stringResource(R.string.camera_back)
+        VisionFrameSource.CAMERA_FRONT -> stringResource(R.string.camera_front)
+        VisionFrameSource.SCREEN_CAPTURE -> stringResource(R.string.camera_screen_capture)
     }
 
     Box(
@@ -154,11 +156,11 @@ fun CameraPreviewOverlay(
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
                     // 视频帧仅写入 VisionFrameBuffer，无远端 Hub
-                    val modeNote = "端侧缓冲"
+                    val modeNote = stringResource(R.string.camera_edge_buffer)
                     Text(
                         text = when (source) {
-                            VisionFrameSource.SCREEN_CAPTURE -> "屏幕采集 → $modeNote"
-                            else -> "$sourceLabel ${framePusher.fps}fps → $modeNote"
+                            VisionFrameSource.SCREEN_CAPTURE -> stringResource(R.string.camera_screen_to_buffer, modeNote)
+                            else -> stringResource(R.string.camera_label_fmt, sourceLabel, framePusher.fps, modeNote)
                         },
                         style = TextStyle(
                             color = Color.White,
@@ -168,8 +170,8 @@ fun CameraPreviewOverlay(
                     )
                     Text(
                         text = when (source) {
-                            VisionFrameSource.SCREEN_CAPTURE -> "右侧按住语音"
-                            else -> "已推送 $frameCount 帧 | ${lastPushMs}ms"
+                            VisionFrameSource.SCREEN_CAPTURE -> "Hold right side for voice"
+                            else -> "Pushed $frameCount frames | ${lastPushMs}ms"
                         },
                         style = TextStyle(
                             color = Color.White.copy(alpha = 0.75f),
@@ -197,7 +199,7 @@ fun CameraPreviewOverlay(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Cameraswitch,
-                        contentDescription = "切换前后摄像头",
+                        contentDescription = stringResource(R.string.camera_switch_desc),
                         tint = Color.White,
                         modifier = Modifier.size(24.dp)
                     )
@@ -213,7 +215,7 @@ fun CameraPreviewOverlay(
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "关闭",
+                    contentDescription = stringResource(R.string.camera_close_desc),
                     tint = Color.White,
                     modifier = Modifier.size(24.dp)
                 )
@@ -255,7 +257,7 @@ fun CameraPreviewOverlay(
                 Box(contentAlignment = Alignment.Center) {
                     Icon(
                         imageVector = Icons.Default.Mic,
-                        contentDescription = if (isVoiceListening) "语音识别中" else "按住语音输入",
+                        contentDescription = if (isVoiceListening) stringResource(R.string.camera_listening_desc) else stringResource(R.string.camera_mic_desc),
                         tint = Color.White,
                         modifier = Modifier.size(24.dp)
                     )
@@ -290,7 +292,7 @@ fun CameraPreviewOverlay(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = if (isVoiceListening) "正在识别语音..." else "右侧悬浮麦克风按住说话",
+                            text = if (isVoiceListening) stringResource(R.string.camera_listening_text) else stringResource(R.string.camera_mic_instruction),
                             style = TextStyle(
                                 color = Color.White.copy(alpha = 0.8f),
                                 fontSize = 13.sp

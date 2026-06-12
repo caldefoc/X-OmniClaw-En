@@ -1,9 +1,9 @@
 ---
 name: clipboard-to-shortcut
 description: |
-  将剪切板中的 App 跳转链接制作成一个可复用的快捷指令 Skill，下次用户说出 Skill 名称即可一键直达对应 App 页面。
-  当用户说"把剪切板的链接做成skill"、"帮我保存这个链接为快捷方式"、"用剪切板内容创建一个skill XX"、"把这个链接制作成skill"、"帮我把复制的链接做成一键跳转"等意图时激活。
-  支持淘宝、拼多多、抖音、快手、知乎、小红书、美团、哔哩哔哩、高德、QQ音乐、支付宝、百度等主流 App 的分享链接。
+  Create a reusable shortcut Skill from an App deep link in the clipboard. Next time the user says the Skill name, it jumps directly to the corresponding App page.
+  Activated when the user says "make a skill from clipboard link", "save this link as a shortcut", "create a skill from clipboard content", etc.
+  Supports share links from major apps including Taobao, Pinduoduo, Douyin, Kuaishou, Zhihu, Xiaohongshu, Meituan, Bilibili, Amap, QQ Music, Alipay, Baidu, etc.
 metadata:
   {
     "xomniclaw": {

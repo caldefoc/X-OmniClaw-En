@@ -65,7 +65,7 @@ class SkillsActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            title = "Skills 管理"
+            title = getString(R.string.skills_title)
         }
 
         skillsLoader = SkillsLoader(this)
@@ -114,7 +114,7 @@ class SkillsActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to load Skills", e)
-                Toast.makeText(this@SkillsActivity, "加载失败: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SkillsActivity, String.format(getString(R.string.skills_load_failed_msg), e.message), Toast.LENGTH_SHORT).show()
             } finally {
                 binding.swipeRefresh.isRefreshing = false
             }
@@ -146,27 +146,39 @@ class SkillsActivity : AppCompatActivity() {
         val workspace = skills.count { it.source == "workspace" }
         val managed = skills.count { it.source == "managed" }
 
-        binding.tvStats.text = "总计: ${skills.size} | 内置: $bundled | 用户: $workspace | 管理: $managed"
+        binding.tvStats.text = getString(R.string.skills_stats, skills.size, bundled, workspace, managed)
     }
 
     private fun showSkillDetail(skill: SkillDisplayModel) {
         val doc = skill.document
         val meta = doc.metadata
 
-        val message = buildString {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.skills_detail_title))
+            .setMessage(buildSkillDetailMessage(skill))
+            .setPositiveButton(getString(R.string.skills_view_content)) { _, _ ->
+                showSkillContent(doc)
+            }
+            .setNegativeButton(getString(R.string.skills_close), null)
+            .show()
+    }
+
+    private fun buildSkillDetailMessage(skill: SkillDisplayModel): String {
+        val doc = skill.document
+        val meta = doc.metadata
+        return buildString {
             appendLine("${meta.emoji ?: "📄"} ${doc.name}")
             appendLine()
-            appendLine("📝 描述:")
+            appendLine(getString(R.string.skills_desc_label))
             appendLine(doc.description)
             appendLine()
-            appendLine("📂 来源: ${getSourceLabel(skill.source)}")
-            appendLine("📍 路径: ${skill.path}")
+            appendLine(getString(R.string.skills_source_label, getSourceLabel(skill.source)))
+            appendLine(getString(R.string.skills_path_label, skill.path))
             appendLine()
-            appendLine("🔄 自动加载: ${if (meta.always) "是" else "否"}")
-
+            appendLine(getString(R.string.skills_autoload_label, if (meta.always) getString(R.string.skills_auto_load_yes) else getString(R.string.skills_auto_load_no)))
             if (meta.requires != null && meta.requires.hasRequirements()) {
                 appendLine()
-                appendLine("⚙️ 依赖:")
+                appendLine(getString(R.string.skills_requires_label))
                 if (meta.requires.bins.isNotEmpty()) {
                     appendLine("  • bins: ${meta.requires.bins.joinToString(", ")}")
                 }
@@ -177,54 +189,44 @@ class SkillsActivity : AppCompatActivity() {
                     appendLine("  • config: ${meta.requires.config.joinToString(", ")}")
                 }
             }
-
             appendLine()
-            appendLine("📊 预估 Tokens: ~${doc.estimateTokens()}")
+            appendLine(getString(R.string.skills_tokens_label, doc.estimateTokens()))
         }
-
-        AlertDialog.Builder(this)
-            .setTitle("Skill 详情")
-            .setMessage(message)
-            .setPositiveButton("查看内容") { _, _ ->
-                showSkillContent(doc)
-            }
-            .setNegativeButton("关闭", null)
-            .show()
     }
 
     private fun showSkillContent(doc: SkillDocument) {
         val content = doc.getFormattedContent()
-            .take(1000) + if (doc.content.length > 1000) "\n\n... (内容过长，仅显示前 1000 字符)" else ""
+            .take(1000) + if (doc.content.length > 1000) getString(R.string.skills_content_truncated) else ""
 
         AlertDialog.Builder(this)
             .setTitle("${doc.metadata.emoji ?: ""} ${doc.name}")
             .setMessage(content)
-            .setPositiveButton("关闭", null)
+            .setPositiveButton(getString(R.string.skills_close), null)
             .show()
     }
 
     private fun getSourceLabel(source: String): String {
         return when (source) {
-            "bundled" -> "📦 内置"
-            "workspace" -> "👤 用户"
-            "managed" -> "🔧 管理"
-            else -> "❓ 未知"
+            "bundled" -> getString(R.string.skills_source_bundled)
+            "workspace" -> getString(R.string.skills_source_workspace)
+            "managed" -> getString(R.string.skills_source_managed)
+            else -> getString(R.string.skills_source_unknown)
         }
     }
 
     private fun confirmDeleteSkill(skill: SkillDisplayModel) {
         if (skill.source == "bundled") {
-            Toast.makeText(this, "内置 Skill 无法删除", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.skills_builtin_cannot_delete), Toast.LENGTH_SHORT).show()
             return
         }
 
         AlertDialog.Builder(this)
-            .setTitle("删除 Skill")
-            .setMessage("确定要删除 \"${skill.document.name}\" 吗？\n\n此操作不可撤销。")
-            .setPositiveButton("删除") { _, _ ->
+            .setTitle(getString(R.string.skills_delete_confirm_title))
+            .setMessage(getString(R.string.skills_delete_confirm_msg, skill.document.name))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
                 deleteSkill(skill)
             }
-            .setNegativeButton("取消", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
@@ -232,22 +234,17 @@ class SkillsActivity : AppCompatActivity() {
         scope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    // Delete Skill directory
                     val skillDir = File(skill.path)
                     if (skillDir.exists()) {
                         skillDir.deleteRecursively()
                         Log.d(TAG, "Deleted: ${skill.path}")
                     }
                 }
-
-                Toast.makeText(this@SkillsActivity, "已删除: ${skill.document.name}", Toast.LENGTH_SHORT).show()
-
-                // Reload (SkillsLoader will automatically rescan the file system)
+                Toast.makeText(this@SkillsActivity, getString(R.string.skills_delete_success, skill.document.name), Toast.LENGTH_SHORT).show()
                 loadSkills()
-
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to delete Skill", e)
-                Toast.makeText(this@SkillsActivity, "删除失败: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SkillsActivity, getString(R.string.skills_delete_failed, e.message), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -309,10 +306,10 @@ class SkillsAdapter(
 
                 // Source label
                 tvSource.text = when (skill.source) {
-                    "bundled" -> "📦 内置"
-                    "workspace" -> "👤 用户"
-                    "managed" -> "🔧 管理"
-                    else -> "❓ 未知"
+                    "bundled" -> binding.root.context.getString(R.string.skills_source_bundled)
+                    "workspace" -> binding.root.context.getString(R.string.skills_source_workspace)
+                    "managed" -> binding.root.context.getString(R.string.skills_source_managed)
+                    else -> binding.root.context.getString(R.string.skills_source_unknown)
                 }
 
                 // Category label (inferred from name)

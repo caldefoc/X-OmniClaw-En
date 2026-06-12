@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App基本信息 -->
+    <string name="app_name">X-OmniClaw</string>
+
+    <!-- Screen stand-in (屏内替身) float -->
+    <string name="companion_float_resize_handle_desc">Drag to resize the stand-in panel</string>
+
+    <!-- Shell命令相关 -->
+    <string name="command_hint">Shell command</string>
+    <string name="command_hint_waiting">Waiting for connection…</string>
+
+    <!-- 通用操作 -->
+    <string name="bookmarks">Bookmarks</string>
+    <string name="last_command">Last command</string>
+    <string name="help">Help</string>
+    <string name="more">More</string>
+    <string name="share">Share</string>
+    <string name="clear">Clear</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="pair">Pair</string>
+    <string name="skip">Skip</string>
+    <string name="dismiss">Dismiss</string>
+
+    <string name="delete_confirm">Are you sure you want to delete?</string>
+
+    <string name="snackbar_intent_failed">Failed to launch intent</string>
+
+    <!-- URL（不翻译） -->
+    <string name="developer_url">https://github.com/omniclaw/omniclaw</string>
+    <string name="source_url">https://github.com/omniclaw/omniclaw</string>
+    <string name="contact_url">mailto:support@example.com</string>
+    <string name="tutorial_url">https://www.xda-developers.com/debloat-your-phone-run-adb-shell-commands-no-root-no-pc</string>
+
+    <!-- 配对相关 -->
+    <string name="paired_key">Paired</string>
+    <string name="port_hint">Port</string>
+    <string name="code_hint">Pairing code</string>
+
+    <string name="pair_title">Pairing info</string>
+    <string name="pair_message">You must use the pairing code from the \"Wireless Debugging\" page in Developer Options to connect this device to X-OmniClaw. If you haven\'t done this before, tap \"Help\" to view the tutorial.</string>
+
+    <!-- 设置相关 -->
+    <string name="settings">Settings</string>
+    <string name="troubleshooting">Troubleshooting</string>
+    <string name="about">About</string>
+
+    <string name="unpair_title">Unpair</string>
+    <string name="unpair_summary">Erase any existing pairing information</string>
+    <string name="unpair_key">unpair</string>
+
+    <string name="restart_title">Restart</string>
+    <string name="restart_summary">Restart the ADB server to apply changed settings</string>
+    <string name="restart_key">restart</string>
+
+    <string name="auto_shell_title">Pair &amp; shell</string>
+    <string name="auto_shell_summary">Automatically enter an ADB shell; disable to enter a regular, non-adb shell without pairing</string>
+    <string name="auto_shell_key">auto_shell</string>
+
+    <string name="buffer_size_title">Buffer size</string>
+    <string name="buffer_size_summary">The size of the screen output buffer. Increasing this value will show more output on the screen at once at the cost of performance. (Default: 16384)</string>
+    <string name="buffer_size_key">buffer_size</string>
+
+    <string name="startup_command_title">Startup command</string>
+    <string name="startup_command_summary">The command to run once the shell has begun</string>
+    <string name="startup_command_key">startup_command</string>
+
+    <string name="tutorial_title">Tutorial</string>
+    <string name="tutorial_summary">View the tutorial from the XDA Developers page</string>
+    <string name="tutorial_key">tutorial</string>
+
+    <!-- 错误信息 -->
+    <string name="error_waiting_title">Stuck on \"Waiting\"</string>
+    <string name="error_waiting_summary">Either you entered the pairing information incorrectly, or your device is not being detected. First, ensure that Wireless Debugging is actually enabled. If that does not work, Try the \"Factory reset\" setting in X-OmniClaw to try pairing again.</string>
+    <string name="error_no_wireless_debugging_title">No \"Wireless Debugging\" toggle</string>
+    <string name="error_no_wireless_debugging_summary">Your device does not natively support Wireless Debugging, which is required by X-OmniClaw. Alternatively, you can use a PC to enable this feature, even on unsupported devices. It will last until the next reboot. Connect the device to a PC and type: adb tcpip 5555</string>
+
+    <!-- 关于页面 -->
+    <string name="developer_title">Developer</string>
+    <string name="developer_summary">X-OmniClaw Team</string>
+    <string name="developer_key">developer</string>
+
+    <string name="source_title">Source code</string>
+    <string name="source_summary">View the source code on GitHub</string>
+    <string name="source_key">source</string>
+
+    <string name="contact_title">Contact</string>
+    <string name="contact_summary">Email me for assistance</string>
+    <string name="contact_key">contact</string>
+
+    <string name="licenses_title">Licenses</string>
+    <string name="licenses_summary">View the open source licenses</string>
+    <string name="licenses_key">licenses</string>
+
+    <!-- Agent相关 -->
+    <string name="agent_running">Agent running</string>
+    <string name="agent_stopped">Agent stopped</string>
+    <string name="agent_error">Agent error</string>
+
+    <!-- 权限相关 -->
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="accessibility_enabled">Accessibility service enabled</string>
+    <string name="accessibility_disabled">Accessibility service not enabled</string>
+    <string name="screen_capture_granted">Screen capture permission granted</string>
+    <string name="screen_capture_denied">Screen capture permission denied</string>
+
+    <!-- 通知相关 -->
+    <string name="notification_channel_created">Notification channel created</string>
+    <string name="foreground_service_title">X-OmniClaw Service</string>
+    <string name="foreground_service_content">Service is running</string>
+
+    <!-- 截图相关 -->
+    <string name="screenshot_failed">Screenshot failed</string>
+    <string name="screenshot_dir_not_set">Screenshot directory not set</string>
+    <string name="screenshot_save_failed">Failed to save screenshot</string>
+    <string name="screenshot_success">Screenshot saved</string>
+
+    <!-- Gateway相关 -->
+    <string name="gateway_starting">Gateway starting</string>
+    <string name="gateway_started">Gateway started</string>
+    <string name="gateway_stopped">Gateway stopped</string>
+    <string name="gateway_error">Gateway error</string>
+
+    <!-- WebSocket相关 -->
+    <string name="websocket_connecting">Connecting to WebSocket…</string>
+    <string name="websocket_connected">WebSocket connected</string>
+    <string name="websocket_disconnected">WebSocket disconnected</string>
+    <string name="websocket_error">WebSocket error</string>
+    <string name="websocket_reconnecting">Attempting to reconnect…</string>
+
+    <!-- 消息处理 -->
+    <string name="message_processing">Processing message</string>
+    <string name="message_process_failed">Failed to process message</string>
+    <string name="unknown_opcode">Unknown opcode: %s</string>
+    <string name="unhandled_event">Unhandled event: %s</string>
+
+    <!-- 会话相关 -->
+    <string name="session_created">Session created</string>
+    <string name="session_loaded">Session loaded</string>
+    <string name="session_saved">Session saved</string>
+    <string name="session_deleted">Session deleted</string>
+    <string name="session_error">Session error</string>
+
+    <!-- 技能相关 -->
+    <string name="skill_loaded">Skill loaded</string>
+    <string name="skill_load_failed">Skill load failed</string>
+    <string name="skill_executing">Executing skill</string>
+    <string name="skill_execution_failed">Skill execution failed</string>
+
+    <!-- 工具相关 -->
+    <string name="tool_executing">Executing tool</string>
+    <string name="tool_execution_success">Tool execution succeeded</string>
+    <string name="tool_execution_failed">Tool execution failed</string>
+
+    <!-- 模型相关 -->
+    <string name="model_loading">Model loading</string>
+    <string name="model_loaded">Model loaded</string>
+    <string name="model_error">Model error</string>
+    <string name="api_call_failed">API call failed</string>
+    <string name="api_call_success">API call succeeded</string>
+
+    <!-- 配置相关 -->
+    <string name="config_loading">Loading configuration</string>
+    <string name="config_loaded">Configuration loaded</string>
+    <string name="config_save_failed">Failed to save configuration</string>
+    <string name="config_invalid">Invalid configuration</string>
+
+    <!-- 通用状态 -->
+    <string name="loading">Loading…</string>
+    <string name="processing">Processing…</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
+    <string name="error">Error</string>
+    <string name="warning">Warning</string>
+    <string name="info">Info</string>
+
+    <!-- 操作提示 -->
+    <string name="tap_to_continue">Tap to continue</string>
+    <string name="swipe_to_dismiss">Swipe to dismiss</string>
+    <string name="long_press_for_options">Long press for options</string>
+
+    <!-- 时间相关 -->
+    <string name="just_now">Just now</string>
+    <string name="minutes_ago">%d minutes ago</string>
+    <string name="hours_ago">%d hours ago</string>
+    <string name="days_ago">%d days ago</string>
+
+    <!-- 无障碍服务 -->
+    <string name="accessibility_service_description">X-OmniClaw Accessibility Service for controlling device interface</string>
+    <string name="accessibility_service_name">X-OmniClaw Accessibility Service</string>
+
+    <!-- 语言设置 -->
+    <string name="language_setting">Language / 语言</string>
+    <string name="language_system">System / 系统</string>
+    <string name="language_english">English</string>
+    <string name="language_chinese">中文</string>
+    <string name="language_change_restart">Language changed. Please restart the app for changes to take effect.</string>
+
+    <!-- activity_config.xml strings -->
+    <string name="model_config_card_title">🤖 Model Configuration</string>
+    <string name="model_config_card_desc">Manage AI providers and models</string>
+    <string name="model_config_content_desc">Model configuration</string>
+    <string name="api_config_title">API Configuration</string>
+    <string name="config_save_path">Configuration saved to /sdcard/.xomniclaw/xomniclaw.json</string>
+    <string name="feature_toggle_title">Feature Toggles</string>
+    <string name="deep_reasoning_label">Enable deep reasoning mode</string>
+    <string name="explore_vs_plan_label">Explore mode vs Plan mode</string>
+    <string name="gateway_config_title">Gateway Configuration</string>
+    <string name="websocket_port_hint">WebSocket port</string>
+    <string name="gateway_auto_run">Gateway runs automatically on app start</string>
+    <string name="skills_management_title">📚 Skills Management</string>
+    <string name="skills_management_desc">View and manage agent skills</string>
+    <string name="skills_content_desc">View skills</string>
+    <string name="channels_management_title">📡 Channels Management</string>
+    <string name="channels_management_desc">Manage Feishu, Discord and other channels</string>
+    <string name="channels_content_desc">View channels</string>
+    <string name="check_update_title">🔄 Check for Updates</string>
+    <string name="current_version_label">Current version: ...</string>
+    <string name="check_update_content_desc">Check for updates</string>
+    <string name="reset_default_btn">Reset to defaults</string>
+    <string name="save_btn">Save</string>
+
+    <!-- activity_main.xml strings -->
+    <string name="title_ai_platform">AI Mobile Automation Platform</string>
+    <string name="gateway_running">Running</string>
+    <string name="view_details_desc">View details</string>
+    <string name="permissions_title">Permissions</string>
+    <string name="already_authorized">Authorized</string>
+    <string name="permission_summary">Accessibility: ✓  Overlay: ✓  Screencast: ✓</string>
+    <string name="skills_count">8 Skills</string>
+    <string name="no_active_session">No active sessions</string>
+    <string name="no_session_desc">No active agent sessions</string>
+    <string name="nav_config">Config</string>
+    <string name="nav_check_update">Check update</string>
+    <string name="nav_log">Log</string>
+
+    <!-- activity_model_config.xml strings -->
+    <string name="model_config_title">Model configuration</string>
+    <string name="stt_not_configured">STT: Not configured</string>
+    <string name="vlm_same_as_agent">VLM: Same as agent model</string>
+    <string name="vlm_not_configured">VLM: Not configured</string>
+    <string name="agent_not_configured">Agent: Not configured</string>
+    <string name="not_configured">Not configured</string>
+    <string name="configured">Configured</string>
+    <string name="get_api_key_howto">📋 How to get an API Key?</string>
+    <string name="open_webpage">Open webpage →</string>
+    <string name="select_model">Select model</string>
+    <string name="add_model_manually">✏️ Add model manually</string>
+    <string name="advanced_options">Advanced options</string>
+    <string name="expand_desc">Expand</string>
+    <string name="api_type_hint">API type</string>
+    <string name="save_and_use">Save &amp; use</string>
+
+    <!-- activity_model_setup.xml strings -->
+    <string name="welcome_title">Welcome to X-OmniClaw</string>
+    <string name="welcome_desc">Default OpenRouter, get your API Key below</string>
+    <string name="how_to_get_api_key">📖 How to get an API Key?</string>
+    <string name="tutorial_steps">1️⃣ Open openrouter.ai and sign up\n2️⃣ Go to \"Keys\" and create an API Key\n3️⃣ Paste the sk-or-v1- key below\n4️⃣ Try free models first, switch in \"Model\" later</string>
+    <string name="open_openrouter">🔗 Open openrouter.ai/keys</string>
+    <string name="api_key_helper">Optional, leave empty to use built-in key</string>
+    <string name="default_model_hint">Default model</string>
+    <string name="openrouter_description">OpenRouter bundles Claude, GPT, Gemini and other mainstream models — one key for all. A $5 top-up lasts a long time.</string>
+    <string name="other_providers_option">⚙️ Use other providers (Google / Anthropic etc.)</string>
+    <string name="skip_btn">Skip</string>
+    <string name="start_btn">Get started</string>
+
+    <!-- activity_stt_provider_config.xml strings -->
+    <string name="stt_provider_title">STT Provider Configuration</string>
+    <string name="get_stt_api_key_howto">📋 How to get STT API Key</string>
+    <string name="stt_tutorial_steps">1. Open SiliconFlow Console\n2. Log in and go to API Keys page\n3. Create a new API Key\n4. Copy the key and paste it below</string>
+    <string name="open_stt_page">Open setup page →</string>
+    <string name="stt_apikey_helper">Saved to models.providers.stt.apiKey</string>
+    <string name="stt_baseurl_helper">Saved to models.providers.stt.baseUrl</string>
+    <string name="stt_model_hint">STT Model ID</string>
+    <string name="stt_model_helper">Saved to models.providers.stt.models[0].id</string>
+    <string name="save_stt_btn">Save &amp; use</string>
+
+    <!-- activity_vlm_provider_config.xml strings -->
+    <string name="vlm_provider_title">VLM Provider Configuration</string>
+    <string name="get_vlm_api_key_howto">📋 VLM Provider Usage</string>
+    <string name="vlm_instructions">1. When \"Same as agent model\" is checked, no vlm provider is written; the agent model is reused at runtime.\n2. When unchecked, settings are saved to models.providers.vlm.\n3. URL and API Key are optional; model ref takes the VLM model ID (or vlm/modelId).</string>
+    <string name="vlm_same_as_agent_checkbox">Same as agent model</string>
+    <string name="vlm_same_as_agent_desc">When checked, VLM follows the agent.</string>
+    <string name="vlm_model_hint">VLM model ref (provider/model)</string>
+    <string name="vlm_url_hint">VLM URL (optional)</string>
+    <string name="vlm_apikey_hint">VLM API Key (optional)</string>
+    <string name="vlm_apikey_helper">Saved to models.providers.vlm.apiKey; leave empty to reuse existing vlm or minimax key</string>
+    <string name="save_vlm_btn">Save VLM Provider</string>
+
+    <!-- dialog_add_model.xml strings -->
+    <string name="model_id_hint">Model ID *</string>
+    <string name="display_name_hint">Display name (optional)</string>
+    <string name="context_window_hint">Context window</string>
+
+    <!-- item_provider_card.xml strings -->
+    <string name="enter_desc">Enter</string>
+
+    <!-- item_skill.xml strings -->
+    <string name="auto_label">🔄 Auto</string>
+    <string name="delete_desc">Delete</string>
+    <string name="builtin_label">📦 Built-in</string>
+
+    <!-- layout_behavior_recording_float.xml strings -->
+    <string name="recording_behavior">Recording behavior</string>
+    <string name="recording_instruction">Start your operation, tap stop when done</string>
+    <string name="bookmark_page_desc">Bookmark current page</string>
+    <string name="stop_recording_desc">Stop recording</string>
+
+    <!-- layout_screen_companion_float.xml strings -->
+    <string name="hold_to_speak">Hold to speak</string>
+    <string name="hold_voice_desc">Hold for voice</string>
+    <string name="stop_companion_desc">Stop companion</string>
+
+    <!-- layout_session_float.xml strings -->
+    <string name="step_counter">Step --/--</string>
+
+    <!-- ChatScreen (Compose) -->
+    <string name="chat_select_session">Select session</string>
+    <string name="chat_delete_session">Delete session</string>
+    <string name="chat_delete_session_title">Delete Session</string>
+    <string name="chat_delete_confirm">Confirm deletion of session "%1$s"? This action cannot be undone.</string>
+    <string name="chat_start_chat">Start chatting</string>
+    <string name="chat_send_to_agent">Send a message to the AI assistant to control your phone</string>
+    <string name="chat_expand_session_list">Expand session list</string>
+    <string name="chat_history_sessions">History</string>
+    <string name="chat_copied">Copied</string>
+    <string name="chat_switch_to_keyboard">Switch to keyboard input</string>
+    <string name="chat_switch_to_voice">Switch to voice input</string>
+    <string name="chat_send_message">Send a message</string>
+    <string name="chat_stop">Stop</string>
+    <string name="chat_send">Send</string>
+    <string name="chat_more_functions">More</string>
+    <string name="chat_release_to_stop">Release to stop</string>
+    <string name="chat_recognizing_waiting">Recognizing — waiting for reply…</string>
+    <string name="chat_hold_to_talk">Hold to talk</string>
+    <string name="chat_intermediate_reply">Intermediate reply</string>
+    <string name="chat_tool_call">Tool call</string>
+    <string name="chat_tool_result">Tool result</string>
+    <string name="chat_system_message">System message</string>
+    <string name="chat_image_preview">Image preview</string>
+    <string name="chat_video_preview">Video preview</string>
+    <string name="chat_click_to_play">Click to play</string>
+    <string name="chat_close">Close</string>
+    <string name="chat_fullscreen_preview">Fullscreen preview</string>
+    <string name="chat_image_not_found">Image not found or unreadable</string>
+    <string name="chat_video_not_found">Video not found or unreadable</string>
+    <string name="chat_empty_state_title">Start a conversation</string>
+    <string name="chat_new_conversation">New Conversation</string>
+    <string name="chat_update">Update</string>
+    <string name="chat_thinking_process">Thinking process</string>
+    <string name="chat_execution_error">Execution error</string>
+    <string name="chat_step">Step</string>
+    <string name="chat_collapse_session_list">Collapse session list</string>
+    <string name="chat_round_label">Round %d</string>
+    <string name="chat_agent_trace">Agent trace · %d steps</string>
+    <string name="chat_collapse_trace">Collapse trace</string>
+    <string name="chat_expand_trace">Expand trace</string>
+    <string name="chat_collapse">Collapse ▲</string>
+    <string name="chat_expand">Expand ▼</string>
+    <string name="chat_running_tasks">Running tasks (click to jump)</string>
+    <string name="chat_latest_step">Latest step: %s</string>
+    <string name="chat_no_summary">No summary</string>
+    <string name="chat_avatar_you">You</string>
+    <string name="chat_avatar_ai">AI</string>
+
+    <!-- Time -->
+    <string name="time_just_now">Just now</string>
+    <string name="time_minutes_ago">%d minutes ago</string>
+    <string name="time_hours_ago">%d hours ago</string>
+
+    <!-- VoiceRecordButton -->
+    <string name="voice_recognizing">Recognizing…</string>
+
+    <!-- CameraPreviewOverlay -->
+    <string name="camera_back">Back camera</string>
+    <string name="camera_front">Front camera</string>
+    <string name="camera_screen_capture">Screen view</string>
+    <string name="camera_edge_buffer">Edge buffer</string>
+    <string name="camera_screen_to_buffer">Screen capture → %s</string>
+    <string name="camera_label_fmt">%1$s %2$dfps → %3$s</string>
+    <string name="camera_screen_instruction">Hold mic on the right side</string>
+    <string name="camera_stats">Pushed %1$d frames | %2$dms</string>
+    <string name="camera_switch_desc">Switch camera</string>
+    <string name="camera_close_desc">Close</string>
+    <string name="camera_listening_desc">Listening</string>
+    <string name="camera_mic_desc">Hold to speak</string>
+    <string name="camera_listening_text">Recognizing speech…</string>
+    <string name="camera_mic_instruction">Hold the floating mic to speak</string>
+
+    <!-- ChannelList -->
+    <string name="channels_title">Channels</string>
+    <string name="channels_subtitle">Configure multi-channel access</string>
+    <string name="channels_feishu_name">Feishu (Lark)</string>
+    <string name="channels_feishu_desc">Feishu group chat and private chat</string>
+    <string name="channels_discord_name">Discord</string>
+    <string name="channels_discord_desc">Discord server and private chat</string>
+    <string name="channels_enabled">Enabled</string>
+    <string name="back">Back</string>
+
+    <!-- DiscordChannel -->
+    <string name="discord_save">Save</string>
+    <string name="discord_saved">Configuration saved. Restart to apply.</string>
+    <string name="discord_enable_title">Enable Discord Channel</string>
+    <string name="discord_enable_desc">Receive Discord messages when enabled</string>
+    <string name="discord_basic_config">Basic Configuration</string>
+    <string name="discord_token_label">Bot Token</string>
+    <string name="discord_name_label">Bot Name (optional)</string>
+    <string name="discord_dm_policy">DM (Direct Message) Policy</string>
+    <string name="discord_dm_open">Open — Accept all DMs</string>
+    <string name="discord_dm_pairing">Pairing — Admin approval required (recommended)</string>
+    <string name="discord_dm_allowlist">Allowlist — Whitelisted users only</string>
+    <string name="discord_allowlist_label">Whitelist User IDs (one per line)</string>
+    <string name="discord_guild_policy">Guild (Server) Policy</string>
+    <string name="discord_guild_open">Open — Accept all channels (needs @mention)</string>
+    <string name="discord_guild_allowlist">Allowlist — Configured channels only (recommended)</string>
+    <string name="discord_reply_mode">Reply Mode</string>
+    <string name="discord_reply_off">Off — No replies (recommended)</string>
+    <string name="discord_reply_always">Always — Always use reply</string>
+    <string name="discord_reply_threads">Threads — Use reply in threads</string>
+    <string name="discord_help_title">Config Notes</string>
+    <string name="discord_help_text">1. Create a Bot in Discord Developer Portal first
+2. Enable MESSAGE CONTENT INTENT (Privileged Intent)
+3. Get the Bot Token and fill it above
+4. Invite the Bot to your server
+5. See extensions/discord/SETUP_GUIDE.md for details</string>
+
+    <!-- FeishuChannel -->
+    <string name="feishu_saved">Configuration saved. Restart to apply.</string>
+    <string name="feishu_enable_title">Enable Feishu Channel</string>
+    <string name="feishu_enable_desc">Receive Feishu messages when enabled</string>
+    <string name="feishu_basic_config">Basic Configuration</string>
+    <string name="feishu_app_id_label">App ID</string>
+    <string name="feishu_app_secret_label">App Secret</string>
+    <string name="feishu_dm_policy">DM (Direct Message) Policy</string>
+    <string name="feishu_dm_open">Open — Accept all DMs</string>
+    <string name="feishu_dm_pairing">Pairing — Admin approval required (recommended)</string>
+    <string name="feishu_dm_allowlist">Allowlist — Whitelisted users only</string>
+    <string name="feishu_allowlist_label">Whitelist User IDs (one per line)</string>
+    <string name="feishu_group_policy">Group Chat Policy</string>
+    <string name="feishu_group_open">Open — Accept all group chats</string>
+    <string name="feishu_group_allowlist">Allowlist — Whitelisted groups only (recommended)</string>
+    <string name="feishu_mention_label">Require @ mention</string>
+    <string name="feishu_help_title">Config Notes</string>
+    <string name="feishu_help_text">1. Create a Feishu app in Feishu Developer Console first
+2. Enable Bot capability and get App ID / App Secret
+3. Fill in the fields above
+4. Configure event subscription
+5. See extensions/feishu/SETUP_GUIDE.md for details</string>
+
+    <!-- Common channel strings -->
+    <string name="channel_help_config">Config Notes</string>
+    <string name="save">Save</string>
+    <string name="config_saved">Configuration saved</string>
+
+    <!-- FeishuChannel (additional) -->
+    <string name="feishu_dm_policy_title">Direct Message Policy</string>
+    <string name="feishu_dm_open_desc">Accepts all DMs</string>
+    <string name="feishu_dm_pairing_desc">Requires pairing to use</string>
+    <string name="feishu_dm_allowlist_desc">Whitelisted users only</string>
+    <string name="feishu_dm_other_desc">Other policies</string>
+    <string name="feishu_group_policy_title">Group Chat Policy</string>
+    <string name="feishu_group_open_desc">Accepts all groups</string>
+    <string name="feishu_group_allowlist_desc">Whitelisted groups only</string>
+    <string name="feishu_group_disabled_desc">Disabled</string>
+    <string name="feishu_group_allowlist_label">Group Whitelist</string>
+    <string name="feishu_group_allowlist_placeholder">One group ID per line\noc_xxxxxx</string>
+    <string name="feishu_mention_desc">Only responds when @mentioned</string>
+    <string name="feishu_config_path">Config saved at:\n/sdcard/.xomniclaw/xomniclaw.json (channels.feishu)</string>
+    <string name="feishu_app_secret_placeholder">Enter App Secret</string>
+
+    <!-- Common / Generic -->
+    <string name="tab_chat">Chat</string>
+    <string name="tab_status">Status</string>
+    <string name="tab_settings">Settings</string>
+    <string name="tab_bookmarks">Bookmarks</string>
+    <string name="permission_title">Grant permissions first</string>
+    <string name="permission_desc">To ensure normal functionality, please complete the following:</string>
+    <string name="permission_item_1">1) Accessibility and system permissions</string>
+    <string name="permission_item_2">2) Photo library permissions</string>
+    <string name="permission_first_time_only">This prompt is shown only once.</string>
+    <string name="permission_go">Grant permissions</string>
+    <string name="permission_later">Later</string>
+    <string name="checking_updates">Checking for updates…</string>
+    <string name="already_latest">Already up-to-date (v%1$s)</string>
+    <string name="update_failed">Update check failed</string>
+    <string name="update_available">Update available</string>
+    <string name="update_now">Update now</string>
+    <string name="update_later">Later</string>
+    <string name="model_unconfigured">Not configured</string>
+    <string name="model_follow_agent">Follow Agent</string>
+    <string name="config_save_success">Configuration saved</string>
+    <string name="config_reset_confirm">Reset to defaults?</string>
+    <string name="config_reset_message">Are you sure you want to reset all configurations to defaults?</string>
+    <string name="config_reset_success">Reset to defaults</string>
+    <string name="config_reset_failed">Reset failed</string>
+    <string name="confirm">Confirm</string>
+    <string name="ok">OK</string>
+    <string name="unknown">Unknown</string>
+    <string name="content_empty">No content</string>
+    <string name="running">Running</string>
+    <string name="stopped">Stopped</string>
+    <string name="enabled_label">Enabled</string>
+    <string name="disabled_label">Disabled</string>
+    <string name="granted">Granted</string>
+    <string name="ungranted">Not granted</string>
+    <string name="total_skills">%d skills</string>
+    <string name="no_active_sessions">No active sessions</string>
+    <string name="active_sessions">%d active sessions</string>
+
+    <!-- ConfigActivity -->
+    <string name="config_title">Configuration</string>
+    <string name="config_current">Current: %s</string>
+    <string name="config_current_version">Current version: v%s</string>
+    <string name="config_new_version">New version v%1$s</string>
+    <string name="config_downloading">Downloading…</string>
+    <string name="config_open_browser">Open in browser</string>
+    <string name="config_load_failed">Load config failed</string>
+    <string name="config_saved_toast">Config saved to xomniclaw.json</string>
+
+    <!-- ModelConfigActivity -->
+    <string name="model_config_agent">Agent: %s</string>
+    <string name="model_config_stt">STT: %s</string>
+    <string name="model_config_vlm">VLM: %s</string>
+    <string name="model_config_configure_stt">Configure STT</string>
+    <string name="model_config_configure_vlm">Configure VLM</string>
+    <string name="model_config_follow_agent">VLM follows Agent (%s)</string>
+    <string name="model_config_free_badge">Free</string>
+    <string name="model_config_reasoning_badge">Reasoning</string>
+    <string name="model_config_add_manually">Add Model</string>
+    <string name="model_config_model_id_empty">Model ID cannot be empty</string>
+    <string name="model_config_api_key_required">API Key is required</string>
+    <string name="model_config_select_model">Please select or enter a model</string>
+    <string name="model_config_saved_tmpl">Saved: %s</string>
+    <string name="model_config_key_optional_helper">Optional (built-in free key available)</string>
+
+    <!-- ModelSetupActivity -->
+    <string name="setup_title">Model Setup</string>
+    <string name="setup_collapse">Collapse advanced options</string>
+    <string name="setup_expand">Use other providers (Anthropic/OpenAI/etc.)</string>
+    <string name="setup_key_hint_sk">Starts with sk-</string>
+    <string name="setup_key_hint_sk_or">Starts with sk-or-v1-</string>
+    <string name="setup_key_hint_sk_ant">Starts with sk-ant-</string>
+    <string name="setup_skip_success">Default config applied</string>
+    <string name="setup_skip_failed">Skip failed. Grant file permission first.</string>
+    <string name="setup_save_success">Setup complete!</string>
+    <string name="setup_open_browser_failed">Cannot open browser</string>
+    <string name="setup_grant_permission_first">Grant file access permission first, then tap skip</string>
+
+    <!-- SkillsActivity -->
+    <string name="skills_title">Skills Manager</string>
+    <string name="skills_stats">Total: %1$d | Built-in: %2$d | User: %3$d | Managed: %4$d</string>
+    <string name="skills_detail_title">Skill Detail</string>
+    <string name="skills_view_content">View content</string>
+    <string name="skills_close">Close</string>
+    <string name="skills_content_truncated">\n\n... (content too long, showing first 1000 chars)</string>
+    <string name="skills_delete_confirm_title">Delete Skill</string>
+    <string name="skills_delete_confirm_msg">Confirm deletion of "%1$s"? This action cannot be undone.</string>
+    <string name="skills_delete_success">Deleted: %s</string>
+    <string name="skills_builtin_cannot_delete">Built-in skills cannot be deleted</string>
+    <string name="skills_source_bundled">Built-in</string>
+    <string name="skills_source_workspace">User</string>
+    <string name="skills_source_managed">Managed</string>
+    <string name="skills_source_unknown">Unknown</string>
+    <string name="skills_auto_load_yes">Yes</string>
+    <string name="skills_auto_load_no">No</string>
+
+    <!-- MainActivity -->
+    <string name="main_gateway_not_running">Gateway not running</string>
+    <string name="main_gateway_running">Running</string>
+    <string name="main_gateway_stopped">Stopped</string>
+    <string name="main_gateway_not_started">Gateway service not started</string>
+    <string name="main_permissions_authorized">Authorized</string>
+    <string name="main_permissions_needed">Needs authorization</string>
+    <string name="main_skills_loading_failed">Load failed</string>
+    <string name="main_view_details">View details</string>
+    <string name="main_no_active_agent_sessions">No active Agent sessions</string>
+    <string name="main_unknown_error">Unknown error</string>
+
+    <!-- SttProviderConfigActivity -->
+    <string name="stt_save_success">STT Provider saved</string>
+    <string name="stt_open_browser_failed">Cannot open browser</string>
+
+    <!-- VlmProviderConfigActivity -->
+    <string name="vlm_follow_agent_enabled">VLM will reuse Agent provider/model.</string>
+    <string name="vlm_follow_agent_disabled">Independent VLM enabled. Please configure provider/model.</string>
+    <string name="vlm_save_failed_no_agent_config">Save failed: Unable to parse Agent model config</string>
+    <string name="vlm_save_failed_write">Save failed: Config file write error</string>
+    <string name="vlm_save_success">VLM Provider saved</string>
+    <string name="vlm_follow_save_failed">Follow toggle save failed</string>
+
+    <!-- ResultActivity -->
+    <string name="result_title">Result Records</string>
+
+    <!-- SkillsActivity (additional) -->
+    <string name="skills_load_failed_msg">Load failed: %s</string>
+    <string name="skills_desc_label">Description:</string>
+    <string name="skills_source_label">Source: %s</string>
+    <string name="skills_path_label">Path: %s</string>
+    <string name="skills_autoload_label">Auto-load: %s</string>
+    <string name="skills_requires_label">Requirements:</string>
+    <string name="skills_tokens_label">Est. Tokens: ~%d</string>
+    <string name="skills_delete_failed">Delete failed: %s</string>
+
+    <!-- MainActivity (additional) -->
+    <string name="main_gateway_status_title">Gateway Status</string>
+    <string name="main_gateway_info_title">Gateway Info</string>
+    <string name="main_test_connection">Test Connection</string>
+    <string name="main_gateway_ok">Gateway running ✅</string>
+    <string name="main_permission_status_title">Permission Status</string>
+    <string name="main_permission_manage_title">Permission Management</string>
+    <string name="main_go_to_settings">Go to Settings</string>
+    <string name="accessibility_service">Accessibility Service</string>
+    <string name="main_overlay_permission">Overlay Permission</string>
+    <string name="main_screen_capture">Screen Capture</string>
+    <string name="main_permission_accessibility_desc">Used for: tap, swipe, input</string>
+    <string name="main_permission_overlay_desc">Used for: displaying Agent status</string>
+    <string name="main_permission_screen_desc">Used for: screenshot observation</string>
+    <string name="main_status_label">Status</string>
+    <string name="main_screen_capture_managed">Screen capture is managed by the accessibility service APK.\nPlease grant it in System Settings.</string>
+    <string name="main_all_permissions_granted">All permissions granted</string>
+    <string name="main_no_skills_installed">No Skills installed</string>
+    <string name="main_messages_count">Messages: %d</string>
+    <string name="main_session_list_title">Session List (%d)</string>
+    <string name="main_load_sessions_failed">Load sessions failed</string>
+    <string name="main_no_logs">No log files</string>
+    <string name="main_logs_title">AgentLoop Logs (%d)</string>
+    <string name="main_chars_truncated">chars truncated</string>
+    <string name="main_read_log_failed">Read log failed</string>
+    <string name="main_unknown_size">Unknown size</string>
+    <string name="main_file_size_label">File size</string>
+    <string name="main_published_label">Published</string>
+    <string name="main_changelog_label">Changelog</string>
+
+    <!-- ModelSetupActivity -->
+    <string name="setup_openrouter_hint">OpenRouter aggregates multiple models (Claude, GPT, Gemini, etc.). One key covers all. Free tier available upon registration!</string>
+    <string name="setup_anthropic_hint">Anthropic Claude series — enter your API Key starting with sk-ant-</string>
+    <string name="setup_openai_hint">OpenAI GPT series — enter your API Key starting with sk-</string>
+    <string name="setup_google_hint">Google Gemini — enter your API Key</string>
+    <string name="setup_custom_hint">Custom provider — configure base URL and API Key manually</string>
+</resources>

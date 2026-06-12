@@ -1,0 +1,7 @@
+248:             Log.i(TAG, "用户跳过模型配置引导，使用默认配置")
+278:             Log.i(TAG, "用户跳过模型配置，已写入内置默认配置: ${target.absolutePath}")
+283:             Log.e(TAG, "跳过并写入默认配置失败", e)
+304:             Log.w(TAG, "无法打开应用级文件管理权限页，改为通用权限页", e)
+308:                 Log.e(TAG, "无法打开文件管理权限设置页", e2)
+393:             Log.i(TAG, "✅ 模型配置已保存: provider=$providerName, model=$modelId")
+399:             Log.e(TAG, "保存配置失败", e)

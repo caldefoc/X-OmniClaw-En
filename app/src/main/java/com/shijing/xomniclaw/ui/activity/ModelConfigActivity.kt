@@ -78,14 +78,14 @@ class ModelConfigActivity : AppCompatActivity() {
             val config = configLoader.reloadOmniClawConfig()
             val providers = config.resolveProviders()
             configuredProviderIds = providers.filter { (_, v) ->
-                !v.apiKey.isNullOrBlank() && !v.apiKey.startsWith("\${") && v.apiKey != "未配置"
+                !v.apiKey.isNullOrBlank() && !v.apiKey.startsWith("\${") && v.apiKey != getString(R.string.model_unconfigured)
             }.keys
 
             // Resolve current model ref
             currentModelRef = config.agents?.defaults?.model?.primary
 
             binding.tvCurrentModel.text =
-                "Agent：${currentModelRef ?: "未配置"}"
+                "getString(R.string.model_config_agent, currentModelRef ?: getString(R.string.model_unconfigured))"
             // 当前模型卡片始终展示（布局顺序：STT → VLM → Agent）。
             binding.cardCurrentModel.visibility = View.VISIBLE
 
@@ -99,17 +99,17 @@ class ModelConfigActivity : AppCompatActivity() {
             // STT Provider 状态在主页面独立展示，避免用户进二级页面才看到配置入口。
             val sttModelId = sttProvider?.models?.firstOrNull()?.id
             binding.tvSttProviderStatus.text = if (sttProvider == null || sttModelId.isNullOrBlank()) {
-                "未配置（点击配置 STT）"
+                getString(R.string.model_config_configure_stt)
             } else {
-                "已配置（stt/$sttModelId）"
+                getString(R.string.model_config_stt, "stt/$sttModelId")
             }
             binding.tvVlmProviderStatus.text = if (followAgentVlm) {
-                "已启用跟随 Agent（已保存独立 VLM 配置）"
+                getString(R.string.model_config_follow_agent, currentModelRef ?: "")
             } else if (vlmProvider == null) {
-                "未配置（点击配置 VLM）"
+                getString(R.string.model_config_configure_vlm)
             } else {
-                val modelId = vlmProvider.models.firstOrNull()?.id ?: "未设置模型"
-                "已配置（vlm/$modelId）"
+                val modelId = vlmProvider.models.firstOrNull()?.id ?: getString(R.string.model_unconfigured)
+                getString(R.string.model_config_vlm, "vlm/$modelId")
             }
 
         } catch (e: Exception) {
@@ -118,11 +118,11 @@ class ModelConfigActivity : AppCompatActivity() {
             currentModelRef = null
             // 即使配置读取失败，也保留总览卡片并给出降级文案。
             binding.cardCurrentModel.visibility = View.VISIBLE
-            binding.tvCurrentModel.text = "Agent：未配置"
-            binding.tvCurrentSttSummary.text = "STT：未配置（模型未设置）"
-            binding.tvCurrentVlmSummary.text = "VLM：未配置（模型未设置）"
-            binding.tvSttProviderStatus.text = "未配置（点击配置 STT Key）"
-            binding.tvVlmProviderStatus.text = "未配置（点击配置 VLM）"
+            binding.tvCurrentModel.text = getString(R.string.agent_not_configured)
+            binding.tvCurrentSttSummary.text = getString(R.string.stt_not_configured)
+            binding.tvCurrentVlmSummary.text = getString(R.string.vlm_not_configured)
+            binding.tvSttProviderStatus.text = getString(R.string.not_configured)
+            binding.tvVlmProviderStatus.text = getString(R.string.model_config_configure_vlm)
         }
     }
 
@@ -132,7 +132,7 @@ class ModelConfigActivity : AppCompatActivity() {
     private fun buildSttSummary(sttProvider: ProviderConfig?): String {
         val model = sttProvider?.models?.firstOrNull()?.id
         return if (model.isNullOrBlank()) {
-            "STT：未配置"
+            getString(R.string.stt_not_configured)
         } else {
             "STT：stt/$model"
         }
@@ -143,13 +143,13 @@ class ModelConfigActivity : AppCompatActivity() {
      */
     private fun buildVlmSummary(vlmProvider: ProviderConfig?, agentModelRef: String?, followAgentVlm: Boolean): String {
         if (followAgentVlm) {
-            return "VLM：跟随 Agent（${agentModelRef ?: "未配置"}）"
+            return getString(R.string.model_config_follow_agent, agentModelRef ?: getString(R.string.not_configured))
         }
         val model = vlmProvider?.models?.firstOrNull()?.id
         return if (!model.isNullOrBlank()) {
             "VLM：vlm/$model"
         } else {
-            "VLM：未配置"
+            getString(R.string.vlm_not_configured)
         }
     }
 
@@ -188,7 +188,7 @@ class ModelConfigActivity : AppCompatActivity() {
     private fun showPage1() {
         binding.pageProviderList.visibility = View.VISIBLE
         binding.pageProviderDetail.visibility = View.GONE
-        binding.toolbar.title = "模型配置"
+        binding.toolbar.title = getString(R.string.model_config_title)
     }
 
     private fun showPage2(provider: ProviderDefinition) {
@@ -275,7 +275,7 @@ class ModelConfigActivity : AppCompatActivity() {
         binding.tilApiKey.hint = provider.keyHint
         binding.etApiKey.setText("")
         if (!provider.keyRequired) {
-            binding.tilApiKey.helperText = "可选（有内置免费 Key）"
+            binding.tilApiKey.helperText = getString(R.string.model_config_key_optional_helper)
         } else {
             binding.tilApiKey.helperText = null
         }
@@ -372,10 +372,10 @@ class ModelConfigActivity : AppCompatActivity() {
 
             if (model.free) {
                 tvBadge.visibility = View.VISIBLE
-                tvBadge.text = "免费"
+                tvBadge.text = getString(R.string.model_config_free_badge)
             } else if (model.reasoning) {
                 tvBadge.visibility = View.VISIBLE
-                tvBadge.text = "推理"
+                tvBadge.text = getString(R.string.model_config_reasoning_badge)
                 tvBadge.setTextColor(getColor(android.R.color.holo_blue_dark))
             }
 
@@ -410,12 +410,12 @@ class ModelConfigActivity : AppCompatActivity() {
         etContextWindow.setText("128000")
 
         AlertDialog.Builder(this)
-            .setTitle("添加模型")
+            .setTitle(getString(R.string.model_config_add_manually))
             .setView(dialogView)
-            .setPositiveButton("添加") { _, _ ->
+            .setPositiveButton(getString(R.string.add)) { _, _ ->
                 val modelId = etModelId.text?.toString()?.trim() ?: ""
                 if (modelId.isBlank()) {
-                    Toast.makeText(this, "模型 ID 不能为空", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.model_config_model_id_empty), Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
                 val modelName = etModelName.text?.toString()?.trim()?.takeIf { it.isNotBlank() } ?: modelId
@@ -436,7 +436,7 @@ class ModelConfigActivity : AppCompatActivity() {
                 selectedModelId = modelId
                 buildModelRadioGroup(allModels)
             }
-            .setNegativeButton("取消", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -447,7 +447,7 @@ class ModelConfigActivity : AppCompatActivity() {
 
         // Validate
         if (provider.keyRequired && apiKey.isNullOrBlank()) {
-            binding.tilApiKey.error = "请输入 API Key"
+            binding.tilApiKey.error = getString(R.string.model_config_api_key_required)
             return
         }
         binding.tilApiKey.error = null
@@ -456,7 +456,7 @@ class ModelConfigActivity : AppCompatActivity() {
         val modelId = selectedModelId
 
         if (modelId.isNullOrBlank()) {
-            Toast.makeText(this, "请选择或输入模型", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.model_config_select_model), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -511,7 +511,7 @@ class ModelConfigActivity : AppCompatActivity() {
 
             configLoader.saveOmniClawConfig(updatedConfig)
 
-            Toast.makeText(this, "✅ 已保存: $modelRef", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.model_config_saved_tmpl, modelRef), Toast.LENGTH_SHORT).show()
             Log.i(TAG, "Saved provider=$providerKey model=$modelRef")
 
             // Return to list or finish
@@ -520,7 +520,7 @@ class ModelConfigActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             Log.e(TAG, "Failed to save config", e)
-            Toast.makeText(this, "保存失败: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.config_save_failed) + ": ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 

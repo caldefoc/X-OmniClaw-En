@@ -9,6 +9,7 @@ import com.shijing.xomniclaw.config.ModelDefinition
 import com.shijing.xomniclaw.config.ModelsConfig
 import com.shijing.xomniclaw.config.ProviderConfig
 import com.shijing.xomniclaw.config.VisionConfig
+import com.shijing.xomniclaw.R
 import com.shijing.xomniclaw.databinding.ActivityVlmProviderConfigBinding
 
 /**
@@ -66,9 +67,9 @@ class VlmProviderConfigActivity : AppCompatActivity() {
     private fun applyFollowAgentUi(followAgent: Boolean) {
         binding.layoutManual.visibility = if (followAgent) android.view.View.GONE else android.view.View.VISIBLE
         binding.tvFollowHint.text = if (followAgent) {
-            "已启用：VLM 将复用 Agent provider/model。"
+            getString(R.string.vlm_follow_agent_enabled)
         } else {
-            "已启用独立 VLM：请填写独立 provider/model 或其他参数。"
+            getString(R.string.vlm_follow_agent_disabled)
         }
     }
 
@@ -84,7 +85,7 @@ class VlmProviderConfigActivity : AppCompatActivity() {
             if (followAgent) {
                 val synced = buildVlmProviderFromAgent(config, providers)
                 if (synced == null) {
-                    Toast.makeText(this, "保存失败：无法解析 Agent 当前模型配置", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, R.string.vlm_save_failed_no_agent_config, Toast.LENGTH_LONG).show()
                     return
                 }
                 providers[VLM_PROVIDER_ID] = synced
@@ -145,13 +146,13 @@ class VlmProviderConfigActivity : AppCompatActivity() {
                 )
             )
             if (!saved) {
-                Toast.makeText(this, "保存失败：配置文件写入失败", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.vlm_save_failed_write), Toast.LENGTH_LONG).show()
                 return
             }
-            Toast.makeText(this, "VLM Provider 已保存", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.vlm_save_success, Toast.LENGTH_SHORT).show()
             finish()
         } catch (e: Exception) {
-            Toast.makeText(this, "保存失败: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.config_save_failed) + ": ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -176,10 +177,10 @@ class VlmProviderConfigActivity : AppCompatActivity() {
             )
             val saved = configLoader.saveOmniClawConfig(updated)
             if (!saved) {
-                Toast.makeText(this, "跟随开关保存失败：配置写入失败", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.vlm_follow_save_failed, Toast.LENGTH_LONG).show()
             }
         }.onFailure { e ->
-            Toast.makeText(this, "跟随开关保存失败: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.vlm_follow_save_failed) + ": ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 

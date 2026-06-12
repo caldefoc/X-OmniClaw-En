@@ -1,7 +1,7 @@
 ---
 name: taobao-search
 description: |
-  淘宝商品搜索。当用户想要搜索商品、找某品牌产品、比价、查看新款等电商购物场景时激活。
+  Taobao product search. Activated when the user wants to search for products, find a brand, compare prices, or browse new arrivals in e-commerce shopping scenarios.
 metadata:
   {
     "xomniclaw": {
